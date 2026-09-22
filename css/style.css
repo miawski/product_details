@@ -5,8 +5,8 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  color: #1f1f1f;
-  background-color: #f5f5f1;
+  color: #101010;
+  background-color: #ffffff;
 }
 
 a {
@@ -24,59 +24,98 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5vw;
+  width: min(1184px, 90vw);
+  margin: 0 auto;
+  padding: 2rem 0;
   background-color: #ffffff;
-  border-bottom: 1px solid #deded8;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 92px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  filter: none;
 }
 
 .site-header nav a {
+  display: inline-block;
+  padding: 0.45rem 0 0.45rem 3rem;
   font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
 
 main {
-  width: min(1200px, 90vw);
+  width: min(1184px, 90vw);
   margin: 0 auto;
-  padding: 3rem 0;
+  padding: 0 0 6rem;
 }
 
 .intro {
-  margin-bottom: 2rem;
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 420px;
+  margin-bottom: 8rem;
+  padding: 4rem 4.5rem;
+  overflow: hidden;
+  background-color: #f4f5f2;
+  border-radius: 32px;
+}
+
+.intro-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 655px;
 }
 
 .intro h1 {
+  position: relative;
   margin: 0;
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
-}
-
-.intro p {
-  max-width: 34rem;
-  color: #595955;
-}
-
-.eyebrow {
-  margin: 0 0 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  width: fit-content;
+  max-width: 680px;
+  font-size: clamp(4rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.intro h1::after {
+  content: "";
+  position: absolute;
+  left: -0.2em;
+  right: -0.2em;
+  bottom: 0.08em;
+  height: 0.34em;
+  z-index: -1;
 }
 
 .produktliste {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 3.5rem;
 }
 
 .product-card {
-  overflow: hidden;
-  background-color: #ffffff;
-  border: 1px solid #deded8;
-  border-radius: 8px;
+  overflow: visible;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(16, 16, 16, 0.12);
 }
 
 .product-card a {
@@ -85,38 +124,61 @@ main {
 }
 
 .product-card img {
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  background-color: #ecece6;
+  aspect-ratio: 4 / 5.85;
+  object-fit: contain;
+  object-position: center top;
+  padding: 2rem 1.5rem 0;
+  background-color: #f4f5f2;
+  border-radius: 8px;
 }
 
 .product-info {
+  position: relative;
   display: grid;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 0.45rem;
+  min-height: 170px;
+  padding: 3rem 0 0;
+}
+
+.product-info::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background-color: #c9752c;
+  border-radius: 50%;
+  box-shadow:
+    28px 0 0 #ffc07f,
+    56px 0 0 #08788a;
 }
 
 .brand,
 .category,
 .status {
   margin: 0;
-  color: #6a6a65;
-  font-size: 0.9rem;
+  color: #7b7b7b;
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 .brand {
   font-weight: 700;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .product-card h2 {
   margin: 0;
-  font-size: 1.1rem;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  line-height: 1.15;
 }
 
 .price {
-  margin: 0.25rem 0 0;
+  align-self: end;
+  margin: 0.7rem 0 0;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
@@ -138,10 +200,32 @@ main {
 
 .details-page {
   max-width: 720px;
+  padding: 5rem 0;
 }
 
 .back-link {
   display: inline-block;
   margin-bottom: 2rem;
   font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .intro {
+    margin-bottom: 3rem;
+  }
+
+  .produktliste {
+    grid-template-columns: 1fr;
+  }
 }
