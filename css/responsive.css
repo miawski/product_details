@@ -1,0 +1,258 @@
+@media (max-width: 1200px) {
+  main,
+  .site-header {
+    width: min(100% - 3rem, 980px);
+  }
+
+  .produktliste {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem 2rem;
+  }
+
+  .home-body .site-header,
+  .home-body .intro {
+    width: min(100% - 3rem, 980px);
+  }
+
+  .product-detail {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    gap: 3rem;
+  }
+
+  .detail-info {
+    min-width: 0;
+  }
+
+  .detail-info h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .home-body .intro {
+    grid-template-columns: minmax(280px, 0.85fr) minmax(340px, 1fr);
+    min-height: 540px;
+    padding: 3rem 3rem 0;
+  }
+
+  .home-body .intro h1 {
+    font-size: clamp(4.8rem, 10vw, 7rem);
+  }
+
+  .home-body .intro-visual {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 900px) {
+  main,
+  .site-header {
+    width: min(100% - 2rem, 760px);
+  }
+
+  .site-header {
+    padding: 1.5rem 0 1.8rem;
+  }
+
+  .produktliste {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.5rem 1.5rem;
+  }
+
+  .product-card img {
+    padding: 1.8rem 1.2rem 0;
+    border-radius: 16px;
+  }
+
+  .product-info {
+    min-height: 0;
+  }
+
+  .product-detail {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .detail-image {
+    width: min(100%, 520px);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 0;
+  }
+
+  .details-page {
+    padding-top: 1rem;
+  }
+
+  .home-body .site-header,
+  .home-body .intro {
+    width: min(100% - 2rem, 760px);
+  }
+
+  .home-body .intro {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 3rem 2.5rem 0;
+  }
+
+  .home-body .intro-copy {
+    padding-bottom: 2rem;
+  }
+
+  .home-body .intro h1 {
+    font-size: clamp(4.5rem, 15vw, 7rem);
+  }
+
+  .home-body .intro-visual {
+    min-height: 460px;
+  }
+
+  .home-body .intro-visual img {
+    object-position: center bottom;
+  }
+}
+
+@media (max-width: 600px) {
+  main,
+  .site-header {
+    width: min(100% - 1.25rem, 420px);
+  }
+
+  .site-header {
+    padding: 1rem 0 1.4rem;
+  }
+
+  .logo {
+    width: 44px;
+  }
+
+  .site-header nav a {
+    padding-left: 1rem;
+    font-size: 0.68rem;
+  }
+
+  main {
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    margin: 1.8rem 0 2.5rem;
+  }
+
+  .intro h1 {
+    font-size: clamp(2.2rem, 13vw, 3.2rem);
+    line-height: 0.95;
+  }
+
+  .produktliste {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .product-card img {
+    aspect-ratio: 4 / 5;
+    padding: 1.4rem 1rem 0;
+  }
+
+  .product-card h2 {
+    font-size: 1.1rem;
+  }
+
+  .brand,
+  .category,
+  .status {
+    font-size: 0.72rem;
+  }
+
+  .back-link {
+    margin-bottom: 2rem;
+    font-size: 0.78rem;
+  }
+
+  .detail-image {
+    aspect-ratio: 4 / 5;
+    padding: 1.5rem 1rem 0;
+  }
+
+  .detail-info {
+    gap: 0.8rem;
+  }
+
+  .detail-info h1 {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .detail-info .price {
+    font-size: 1.15rem;
+  }
+
+  .detail-list {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .home-body .site-header,
+  .home-body .intro {
+    width: min(100% - 1.25rem, 420px);
+  }
+
+  .home-body .site-header {
+    padding: 1rem 0 1.3rem;
+  }
+
+  .home-body .site-header nav a {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.68rem;
+  }
+
+  .home-body main {
+    padding-bottom: 3.5rem;
+  }
+
+  .home-body .intro {
+    padding: 2rem 1.25rem 0;
+    border-radius: 18px;
+  }
+
+  .home-body .intro h1 {
+    font-size: clamp(4rem, 22vw, 5.8rem);
+  }
+
+  .home-body .primary-link {
+    margin-top: 1.4rem;
+    padding: 0.9rem 1.15rem;
+    font-size: 0.75rem;
+  }
+
+  .home-body .intro-visual {
+    min-height: 340px;
+  }
+
+  .home-body .intro-visual::before,
+  .home-body .intro-visual::after {
+    font-size: 2.2rem;
+  }
+
+  .home-band {
+    height: 64px;
+  }
+}
+
+@media (max-width: 380px) {
+  main,
+  .site-header,
+  .home-body .site-header,
+  .home-body .intro {
+    width: calc(100% - 1rem);
+  }
+
+  .home-body .intro {
+    padding-inline: 1rem;
+  }
+
+  .home-body .intro h1 {
+    font-size: clamp(3.4rem, 21vw, 4.7rem);
+  }
+
+  .home-body .primary-link,
+  .site-header nav a {
+    font-size: 0.68rem;
+  }
+}

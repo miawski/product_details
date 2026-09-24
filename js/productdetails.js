@@ -1,9 +1,13 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-const main = document.querySelector(".details-page");
+const endpoint = `https://kea-alt-del.dk/t7/api/products/${id}`;
+const product = document.querySelector("#product");
+const backbutton = document.querySelector("#backbutton");
+
+backbutton.addEventListener("click", () => history.back());
 
 if (id) {
-  fetch(`https://kea-alt-del.dk/t7/api/products/${id}`)
+  fetch(endpoint)
     .then((response) => response.json())
     .then(visProdukt)
     .catch(visFejl);
@@ -31,8 +35,7 @@ function visProdukt(produkt) {
     .map((detalje) => `<dt>${detalje[0]}</dt><dd>${detalje[1]}</dd>`)
     .join("");
 
-  main.innerHTML = `
-    <a class="back-link" href="productlist.html">Tilbage til produktlisten</a>
+  product.innerHTML = `
     <section class="product-detail">
       <img class="detail-image product-image-${produkt.id}" src="${billede}" alt="${produkt.productdisplayname}" />
       <div class="detail-info">
@@ -49,8 +52,7 @@ function visProdukt(produkt) {
 }
 
 function visFejl() {
-  main.innerHTML = `
-    <a class="back-link" href="productlist.html">Tilbage til produktlisten</a>
+  product.innerHTML = `
     <h1>Produktet blev ikke fundet</h1>
   `;
 }
@@ -62,11 +64,17 @@ URLSearchParams(window.location.search) læser query string fra URL'en.
 
 params.get("id") henter produktets id fra URL'en, fx 1163 fra productdetails.html?id=1163.
 
-main finder HTML-elementet, hvor produktdetaljerne skal vises.
+endpoint gemmer API-adressen til det specifikke produkt.
+
+product finder HTML-elementet, hvor produktdetaljerne skal vises.
+
+backbutton finder tilbage-knappen i HTML.
+
+backbutton.addEventListener("click", () => history.back()) sender brugeren tilbage til den side, de kom fra.
 
 if (id) tjekker om der faktisk findes et produkt-id i URL'en.
 
-fetch(`https://kea-alt-del.dk/t7/api/products/${id}`) henter data for ét bestemt produkt.
+fetch(endpoint) henter data for ét bestemt produkt.
 
 .then((response) => response.json()) laver API-svaret om til JavaScript-data.
 
@@ -96,7 +104,7 @@ detaljer er et array med de produktoplysninger, der skal vises i detail-listen.
 
 .join("") samler alle detail-linjerne til én HTML-tekst.
 
-main.innerHTML indsætter hele produktvisningen på siden.
+product.innerHTML indsætter hele produktvisningen på siden.
 
 visFejl() indsætter en tilbage-link og en fejlbesked, hvis produktet ikke findes.
 */

@@ -1,0 +1,270 @@
+:root {
+  --ux-black: #0f0f0f;
+  --ux-white: #ffffff;
+  --ux-yellow: #f1dc5c;
+  --ux-soft: #f4f6f5;
+  --ux-shadow: 0 18px 45px rgba(15, 15, 15, 0.12);
+  --ux-fast: 180ms ease;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-radius: 0;
+  backdrop-filter: blur(18px);
+  background-color: rgba(255, 255, 255, 0.92);
+  transition:
+    box-shadow var(--ux-fast),
+    transform var(--ux-fast);
+}
+
+.site-header:hover {
+  box-shadow: var(--ux-shadow);
+}
+
+body:not(.home-body) .site-header {
+  width: 100%;
+  margin: 0;
+  padding-right: max(5vw, calc((100vw - 1184px) / 2));
+  padding-left: max(5vw, calc((100vw - 1184px) / 2));
+}
+
+body.home-body .site-header {
+  width: 100%;
+  margin: 0;
+  padding-right: max(3.75rem, calc((100vw - 1280px) / 2));
+  padding-left: max(3.75rem, calc((100vw - 1280px) / 2));
+}
+
+.logo,
+.site-header nav a,
+.primary-link,
+.back-link,
+.product-card a {
+  transition:
+    color var(--ux-fast),
+    background-color var(--ux-fast),
+    box-shadow var(--ux-fast),
+    transform var(--ux-fast),
+    opacity var(--ux-fast);
+}
+
+.logo:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.site-header nav a {
+  border-radius: 999px;
+}
+
+.site-header nav a:hover {
+  color: var(--ux-white);
+  background-color: var(--ux-black);
+  transform: translateY(-2px);
+}
+
+.site-header nav a:focus-visible,
+.primary-link:focus-visible,
+.back-link:focus-visible,
+.product-card a:focus-visible {
+  outline: 3px solid var(--ux-yellow);
+  outline-offset: 4px;
+}
+
+.primary-link:hover {
+  background-color: var(--ux-yellow);
+  color: var(--ux-black);
+  box-shadow: 0 14px 30px rgba(15, 15, 15, 0.18);
+  transform: translateY(-3px);
+}
+
+.primary-link:active,
+.back-link:active,
+.site-header nav a:active {
+  transform: translateY(0);
+}
+
+.back-link {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 46px;
+  padding: 0.85rem 1.15rem 0.85rem 3rem;
+  border-radius: 999px;
+  background-color: var(--ux-black);
+  color: var(--ux-white);
+  box-shadow: 0 12px 28px rgba(15, 15, 15, 0.16);
+}
+
+.back-link::before {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background-color: var(--ux-yellow);
+  transform: translateY(-50%);
+}
+
+.back-link::after {
+  content: "";
+  position: absolute;
+  left: 1.43rem;
+  top: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-left: 2px solid var(--ux-black);
+  border-bottom: 2px solid var(--ux-black);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.back-link:hover {
+  background-color: var(--ux-yellow);
+  color: var(--ux-black);
+  box-shadow: 0 16px 34px rgba(15, 15, 15, 0.2);
+  transform: translateY(-3px);
+}
+
+.back-link:hover::before {
+  background-color: var(--ux-black);
+}
+
+.back-link:hover::after {
+  border-color: var(--ux-white);
+}
+
+.product-card a {
+  border-radius: 22px;
+}
+
+.product-card a:hover {
+  transform: translateY(-8px);
+}
+
+.product-card img,
+.detail-image {
+  transition:
+    box-shadow var(--ux-fast),
+    transform var(--ux-fast);
+}
+
+.product-card a:hover img {
+  box-shadow: var(--ux-shadow);
+  transform: scale(1.015);
+}
+
+.detail-image:hover {
+  box-shadow: var(--ux-shadow);
+}
+
+@media (max-width: 600px) {
+  body:not(.home-body) .site-header,
+  body.home-body .site-header {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .back-link {
+    width: fit-content;
+    min-height: 42px;
+    padding: 0.75rem 1rem 0.75rem 2.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  body:not(.home-body) .site-header,
+  body.home-body .site-header {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .site-header,
+  .site-header nav a,
+  .primary-link,
+  .back-link,
+  .product-card a,
+  .product-card img,
+  .detail-image {
+    transition: none;
+  }
+
+  .logo:hover,
+  .site-header nav a:hover,
+  .primary-link:hover,
+  .back-link:hover,
+  .product-card a:hover,
+  .product-card a:hover img {
+    transform: none;
+  }
+}
+
+/*
+Forklaring:
+
+:root gemmer farver, skygge og transition-hastighed som CSS-variabler, så de samme værdier kan genbruges flere steder.
+
+.site-header gør navigationen sticky med top: 0, så headeren bliver siddende øverst, når man scroller.
+
+.site-header bruger z-index, så headeren ligger over sidens indhold.
+
+.site-header bruger backdrop-filter og en næsten hvid baggrund, så den føles som en moderne fast navigation.
+
+.site-header:hover tilføjer skygge, så headeren får dybde, når brugeren interagerer med den.
+
+.logo, nav-links, primary-link, back-link og product-card a får transitions, så hover og klik føles blødere.
+
+.logo:hover løfter logoet en smule, så det føles klikbart.
+
+.site-header nav a får pilleformet border-radius, så hover-fladen ligner en moderne navigationsknap.
+
+.site-header nav a:hover ændrer nav-linket til sort baggrund og hvid tekst, så interaktionen er tydelig.
+
+:focus-visible giver tastaturbrugere en tydelig gul fokusmarkering på links, knapper og produktkort.
+
+.primary-link:hover ændrer den sorte CTA-knap til gul, tilføjer skygge og løfter knappen en smule.
+
+:active på knapper og nav-links nulstiller løftet, så klik føles fysisk og responsivt.
+
+.back-link styler tilbage-knappen som en tydelig UX-knap med sort baggrund, hvid tekst, rund form og skygge.
+
+.back-link::before tegner den runde gule ikon-baggrund inde i tilbage-knappen.
+
+.back-link::after tegner selve tilbage-pilen med CSS-border, så ikonet er visuelt og ikke ekstra tekst.
+
+.back-link:hover vender farverne om, så knappen reagerer tydeligt ved hover.
+
+.back-link:hover::before ændrer ikon-baggrunden, så den passer til knappens hover-state.
+
+.back-link:hover::after ændrer pilens farve, så den stadig har kontrast på hover.
+
+.product-card a får rundet klikområde, så hover-effekten følger kortets form.
+
+.product-card a:hover løfter produktkortet, så brugeren kan se, at hele kortet er klikbart.
+
+.product-card img og .detail-image får transitions, så billedeffekter ikke springer brat.
+
+.product-card a:hover img giver produktbilledet skygge og en diskret scale-effekt på hover.
+
+.detail-image:hover giver detaljebilledet samme visuelle dybde som produktkortene.
+
+body:not(.home-body) .site-header strækker headerbaggrunden over hele viewportens bredde og holder indholdet ud for sidens maksbredde.
+
+body.home-body .site-header gør det samme på forsiden med forsidens bredere maksbredde.
+
+border-radius: 0 fjerner afrundede hjørner, så headerbaggrunden går helt ud til skærmens kanter.
+
+@media (max-width: 600px) tilpasser header og tilbage-knap til små mobilskærme.
+
+Padding-reglerne ved 600px og 380px holder headerindholdet inden for skærmen på smalle mobiler.
+
+@media (prefers-reduced-motion: reduce) fjerner animationer for brugere, der har valgt reduceret bevægelse i deres system.
+*/
