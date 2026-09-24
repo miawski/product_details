@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap");
+
+body.home-body {
+  min-height: 100vh;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  background: #ffffff;
+}
+
+.home-shell {
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.home-body .site-header {
+  width: min(1280px, calc(100% - 7.5rem));
+  padding: 2rem 0 1.8rem;
+}
+
+.home-body .logo {
+  width: 58px;
+}
+
+.home-body .site-header nav a {
+  padding: 0.7rem 1.15rem;
+  color: #ffffff;
+  background: #050505;
+  border-radius: 4px;
+  font-size: 0.72rem;
+}
+
+.home-body main {
+  width: 100%;
+  padding: 0 0 5rem;
+}
+
+.home-body .intro {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(420px, 1fr);
+  align-items: center;
+  width: min(1280px, calc(100% - 7.5rem));
+  min-height: 620px;
+  margin: 0 auto 3.5rem;
+  padding: 4rem 4.5rem 0;
+  overflow: hidden;
+  background: #f4f6f5;
+  border-radius: 28px;
+}
+
+.home-body .intro-copy {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  padding-bottom: 3.6rem;
+}
+
+.home-body .intro h1 {
+  max-width: 430px;
+  font-size: clamp(5.5rem, 11vw, 9rem);
+  line-height: 0.88;
+}
+
+.home-body .intro h1 span {
+  display: inline;
+  padding: 0;
+  background: none;
+}
+
+.home-body .primary-link {
+  margin-top: 2.2rem;
+  padding: 1.05rem 1.65rem;
+  background: #050505;
+  border-radius: 5px;
+  font-size: 0.82rem;
+}
+
+.home-body .intro-visual {
+  position: relative;
+  align-self: end;
+  height: 100%;
+  min-height: 560px;
+}
+
+.home-body .intro-visual::before,
+.home-body .intro-visual::after {
+  position: absolute;
+  color: #e4e4e4;
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1;
+  content: "*";
+}
+
+.home-body .intro-visual::before {
+  top: 2.2rem;
+  left: 1.4rem;
+}
+
+.home-body .intro-visual::after {
+  right: 0.4rem;
+  bottom: 3.6rem;
+}
+
+.home-body .intro-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.home-band {
+  height: 96px;
+  background: #eadb5d;
+}
+
+@media (max-width: 700px) {
+  body.home-body {
+    padding: 0;
+  }
+
+  .home-shell {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .home-body .site-header {
+    width: min(100% - 2rem, 1020px);
+    padding: 1.2rem 0;
+  }
+
+  .home-body .intro {
+    grid-template-columns: 1fr;
+    width: min(100% - 2rem, 1020px);
+    min-height: 0;
+    margin-bottom: 2rem;
+    padding: 2rem 1.4rem 0;
+    border-radius: 20px;
+  }
+
+  .home-body .intro-copy {
+    padding-bottom: 1.8rem;
+  }
+
+  .home-body .intro h1 {
+    font-size: clamp(4rem, 24vw, 6rem);
+  }
+
+  .home-body .intro-visual {
+    min-height: 320px;
+  }
+
+  .home-band {
+    height: 72px;
+  }
+}

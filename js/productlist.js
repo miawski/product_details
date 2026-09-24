@@ -1,45 +1,22 @@
-// Gemmer API-adressen, hvor produktdata bliver hentet fra.
 const endpoint = "https://kea-alt-del.dk/t7/api/products?limit=20";
-
-// Finder HTML-elementet med classen "produktliste", hvor produkterne skal vises.
 const produktliste = document.querySelector(".produktliste");
 
-// Henter produktdata fra API'et.
 fetch(endpoint)
-  // Laver svaret fra API'et om til JavaScript-data.
   .then((response) => response.json())
-  // Sender produktlisten videre til funktionen, der viser produkterne på siden.
   .then(visProdukter)
-  // Kører fejl-funktionen, hvis produkterne ikke kan hentes.
   .catch(visFejl);
 
-// Funktionen modtager alle produkter fra API'et.
 function visProdukter(produkter) {
-  // Laver hvert produkt om til HTML og sætter det ind i produktliste-sectionen.
   produktliste.innerHTML = produkter.map(lavProduktKort).join("");
 }
-// Funktionen laver HTML-koden for et enkelt produkt.
+
 function lavProduktKort(produkt) {
-  // Bygger billedets URL ud fra produktets id.
   const billede = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
-
-  // Regner rabatprisen ud, hvis produktet har rabat.
   const rabatPris = Math.round(produkt.price - (produkt.price * produkt.discount) / 100);
-
-  // Vælger om prisen skal vises med rabatpris eller kun normal pris.
-  const pris = produkt.discount
-    ? // Hvis produktet har rabat, vises både gammel pris og rabatpris.
-      `<p class="price"><span class="old-price">${produkt.price} kr.</span> ${rabatPris} kr.</p>`
-    : // Hvis produktet ikke har rabat, vises kun normal pris.
-      `<p class="price">${produkt.price} kr.</p>`;
-
-  // Tilføjer classen "sold-out", hvis produktet er udsolgt.
+  const pris = produkt.discount ? `<p class="price"><span class="old-price">${produkt.price} kr.</span> ${rabatPris} kr.</p>` : `<p class="price">${produkt.price} kr.</p>`;
   const udsolgtClass = produkt.soldout ? " sold-out" : "";
-
-  // Laver en udsolgt-tekst, hvis produktet er udsolgt.
   const udsolgtTekst = produkt.soldout ? `<p class="status">Udsolgt</p>` : "";
 
-  // Returnerer HTML-strukturen for produktkortet.
   return `
     <article class="product-card${udsolgtClass}">
       <a href="productdetails.html?id=${produkt.id}">
@@ -56,8 +33,46 @@ function lavProduktKort(produkt) {
   `;
 }
 
-// Funktionen vises, hvis der sker en fejl med at hente produkterne.
 function visFejl() {
-  // Skriver en fejlbesked i produktlisten.
   produktliste.innerHTML = "<p>Produkterne kunne ikke hentes lige nu.</p>";
 }
+
+/*
+Forklaring:
+
+const endpoint gemmer API-adressen til produktlisten.
+
+const produktliste finder HTML-elementet, hvor produktkortene skal sættes ind.
+
+fetch(endpoint) henter produkterne fra API'et.
+
+.then((response) => response.json()) laver API-svaret om til JavaScript-data.
+
+.then(visProdukter) sender produkt-arrayet videre til funktionen visProdukter.
+
+.catch(visFejl) kører visFejl, hvis data ikke kan hentes.
+
+visProdukter(produkter) modtager arrayet med produkter.
+
+produkter.map(lavProduktKort) kører lavProduktKort én gang for hvert produkt.
+
+.join("") samler alle produktkort til én samlet HTML-tekst.
+
+lavProduktKort(produkt) modtager ét produkt ad gangen som parameter.
+
+billede bygger produktets billed-URL ud fra produkt.id.
+
+rabatPris regner den nye pris ud, hvis produktet har rabat.
+
+pris vælger HTML for normal pris eller rabatpris.
+
+udsolgtClass tilføjer CSS-classen sold-out, hvis produktet er udsolgt.
+
+udsolgtTekst laver teksten "Udsolgt", hvis produktet er udsolgt.
+
+return sender HTML-strukturen for produktkortet tilbage til map().
+
+Linket bruger productdetails.html?id=${produkt.id}, så detaljesiden ved hvilket produkt der skal vises.
+
+visFejl() viser en fejlbesked i produktlisten, hvis API'et fejler.
+*/

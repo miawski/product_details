@@ -1,45 +1,22 @@
-// Finder id'et fra URL'en, fx productdetails.html?id=1163.
 const params = new URLSearchParams(window.location.search);
-
-// Gemmer produktets id fra URL'en.
 const id = params.get("id");
-
-// Finder main-elementet, hvor produktdetaljerne skal vises.
 const main = document.querySelector(".details-page");
 
-// Tjekker om der findes et id i URL'en.
 if (id) {
-  // Henter data om det enkelte produkt fra API'et.
   fetch(`https://kea-alt-del.dk/t7/api/products/${id}`)
-    // Laver svaret fra API'et om til JavaScript-data.
     .then((response) => response.json())
-    // Sender produktet videre til funktionen, der viser produktdetaljerne.
     .then(visProdukt)
-    // Viser en fejlbesked, hvis produktet ikke kan hentes.
     .catch(visFejl);
 } else {
-  // Viser en fejlbesked, hvis URL'en ikke indeholder et produkt-id.
   visFejl();
 }
 
-// Funktionen viser alle relevante detaljer om produktet på siden.
 function visProdukt(produkt) {
-  // Bygger billedets URL ud fra produktets id.
   const billede = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
-
-  // Tjekker om produktet har rabat.
   const harRabat = produkt.discount > 0;
-
-  // Regner rabatprisen ud, hvis produktet har rabat.
   const rabatPris = Math.round(produkt.price - (produkt.price * produkt.discount) / 100);
-
-  // Vælger om prisen skal vises med rabatpris eller kun normal pris.
   const pris = harRabat ? `<p class="price"><span class="old-price">${produkt.price} kr.</span> ${rabatPris} kr.</p>` : `<p class="price">${produkt.price} kr.</p>`;
-
-  // Laver en tekst, hvis produktet er udsolgt.
   const udsolgtTekst = produkt.soldout ? `<p class="status">Udsolgt</p>` : "";
-
-  // Samler produktets ekstra informationer i en liste.
   const detaljer = [
     ["Mærke", produkt.brandname],
     ["Kategori", produkt.category],
@@ -50,14 +27,10 @@ function visProdukt(produkt) {
     ["År", produkt.productionyear],
     ["Brug", produkt.usagetype],
   ]
-    // Fjerner tomme værdier, så siden kun viser data, som findes.
     .filter((detalje) => detalje[1])
-    // Laver hver detalje om til HTML.
     .map((detalje) => `<dt>${detalje[0]}</dt><dd>${detalje[1]}</dd>`)
-    // Samler alle HTML-linjer til én samlet tekst.
     .join("");
 
-  // Sætter produktdetaljerne ind på siden.
   main.innerHTML = `
     <a class="back-link" href="productlist.html">Tilbage til produktlisten</a>
     <section class="product-detail">
@@ -75,11 +48,55 @@ function visProdukt(produkt) {
   `;
 }
 
-// Funktionen vises, hvis produktdetaljerne ikke kan hentes.
 function visFejl() {
-  // Skriver en fejlbesked på details-siden.
   main.innerHTML = `
     <a class="back-link" href="productlist.html">Tilbage til produktlisten</a>
     <h1>Produktet blev ikke fundet</h1>
   `;
 }
+
+/*
+Forklaring:
+
+URLSearchParams(window.location.search) læser query string fra URL'en.
+
+params.get("id") henter produktets id fra URL'en, fx 1163 fra productdetails.html?id=1163.
+
+main finder HTML-elementet, hvor produktdetaljerne skal vises.
+
+if (id) tjekker om der faktisk findes et produkt-id i URL'en.
+
+fetch(`https://kea-alt-del.dk/t7/api/products/${id}`) henter data for ét bestemt produkt.
+
+.then((response) => response.json()) laver API-svaret om til JavaScript-data.
+
+.then(visProdukt) sender produkt-objektet videre til funktionen visProdukt.
+
+.catch(visFejl) viser fejlbeskeden, hvis produktet ikke kan hentes.
+
+else visFejl() kører, hvis URL'en mangler et id.
+
+visProdukt(produkt) modtager ét produkt som parameter.
+
+billede bygger produktets billed-URL ud fra produkt.id.
+
+harRabat gemmer true eller false alt efter om produkt.discount er større end 0.
+
+rabatPris regner produktets pris efter rabat.
+
+pris vælger HTML for normal pris eller rabatpris.
+
+udsolgtTekst laver teksten "Udsolgt", hvis produktet er udsolgt.
+
+detaljer er et array med de produktoplysninger, der skal vises i detail-listen.
+
+.filter((detalje) => detalje[1]) fjerner oplysninger uden værdi.
+
+.map((detalje) => ...) laver hver oplysning om til dt/dd HTML.
+
+.join("") samler alle detail-linjerne til én HTML-tekst.
+
+main.innerHTML indsætter hele produktvisningen på siden.
+
+visFejl() indsætter en tilbage-link og en fejlbesked, hvis produktet ikke findes.
+*/
