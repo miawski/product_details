@@ -103,6 +103,10 @@ main {
   border-radius: 20px;
 }
 
+.product-card img.product-image-1165 {
+  padding-top: 3.8rem;
+}
+
 .product-info {
   display: grid;
   gap: 0.45rem;
@@ -157,13 +161,92 @@ main {
 }
 
 .details-page {
-  max-width: 720px;
-  padding: 5rem 0;
+  padding: 2rem 0 7rem;
 }
 
 .back-link {
   display: inline-block;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.primary-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  background-color: #101010;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.product-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: 5rem;
+  align-items: start;
+}
+
+.detail-image {
+  aspect-ratio: 484 / 704;
+  object-fit: contain;
+  object-position: center top;
+  padding: 3rem 2rem 0;
+  background-color: #f4f6f5;
+  border-radius: 20px;
+}
+
+.detail-info {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.detail-info h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.detail-info .brand {
+  font-size: 0.85rem;
+}
+
+.detail-info .price {
+  align-self: auto;
+  margin: 0.5rem 0 1rem;
+  font-size: 1.4rem;
+}
+
+.detail-list {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.7rem 2rem;
+  margin: 1.5rem 0 0;
+  padding: 1.5rem 0 0;
+}
+
+.detail-list dt,
+.detail-list dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.detail-list dt {
+  color: #7c7c7c;
+  font-weight: 700;
+}
+
+.detail-list dd {
   font-weight: 700;
 }
 
@@ -191,6 +274,20 @@ main {
     grid-template-columns: 1fr;
     gap: 3.5rem;
   }
+
+  .product-detail {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .detail-info h1 {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .detail-list {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
 }
 
 @media (min-width: 701px) and (max-width: 1100px) {
@@ -198,5 +295,10 @@ main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-bottom: 3rem;
     gap: 3.5rem;
+  }
+
+  .product-detail {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+    gap: 3rem;
   }
 }
