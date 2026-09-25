@@ -1,66 +1,66 @@
 const endpoint = "https://kea-alt-del.dk/t7/api/categories";
-const catListeContainer = document.querySelector("#catListeContainer");
+const categoryListContainer = document.querySelector("#categoryListContainer");
 
 fetch(endpoint)
   .then((response) => {
     if (!response.ok) {
-      throw new Error("Kategorierne kunne ikke hentes.");
+      throw new Error("Categories could not be loaded.");
     }
 
     return response.json();
   })
-  .then(visKategorier)
-  .catch(visFejl);
+  .then(renderCategories)
+  .catch(showError);
 
-function visKategorier(kategorier) {
-  catListeContainer.replaceChildren();
+function renderCategories(categories) {
+  categoryListContainer.replaceChildren();
 
-  kategorier.forEach((element) => {
-    const kategoriLink = document.createElement("a");
-    const parametre = new URLSearchParams({ cat: element.category });
+  categories.forEach((category) => {
+    const categoryLink = document.createElement("a");
+    const params = new URLSearchParams({ cat: category.category });
 
-    kategoriLink.href = `productlist.html?${parametre.toString()}`;
-    kategoriLink.textContent = element.category;
-    catListeContainer.appendChild(kategoriLink);
+    categoryLink.href = `productlist.html?${params.toString()}`;
+    categoryLink.textContent = category.category;
+    categoryListContainer.appendChild(categoryLink);
   });
 }
 
-function visFejl() {
-  catListeContainer.textContent = "Kategorierne kunne ikke hentes lige nu.";
+function showError() {
+  categoryListContainer.textContent = "Categories could not be loaded right now.";
 }
 
 /*
-Forklaring:
+ Explanation:
 
-endpoint gemmer adressen til KEA's API med kategorier.
+endpoint stores the address of KEA's categories API.
 
-catListeContainer finder det tomme HTML-element, hvor kategorierne skal vises.
+categoryListContainer selects the empty HTML element where the categories will appear.
 
-fetch(endpoint) henter kategorierne fra API'et.
+fetch(endpoint) requests the categories from the API.
 
-response.ok kontrollerer, om serveren har sendt et vellykket svar.
+response.ok checks whether the server returned a successful response.
 
-response.json() omdanner svaret til JavaScript-data.
+response.json() converts the response into JavaScript data.
 
-.then(visKategorier) sender kategorierne videre til funktionen visKategorier.
+.then(renderCategories) passes the categories to the renderCategories function.
 
-.catch(visFejl) viser en fejlbesked, hvis API-kaldet fejler.
+.catch(showError) displays an error message if the API request fails.
 
-visKategorier(kategorier) modtager listen med kategorier.
+renderCategories(categories) receives the category list.
 
-replaceChildren() rydder containeren, inden kategorierne sættes ind.
+replaceChildren() clears the container before the categories are added.
 
-forEach() gentager koden for hver kategori i arrayet.
+forEach() repeats the code for every category in the array.
 
-document.createElement("a") opretter et link til kategorien.
+document.createElement("a") creates a link for a category.
 
-URLSearchParams opbygger en korrekt kodet cat-parameter, også når kategorinavnet har mellemrum.
+URLSearchParams creates an encoded cat parameter, including when a category name contains spaces.
 
-kategoriLink.href sender brugeren til productlist.html med den valgte kategori i URL'en.
+categoryLink.href sends the user to productlist.html with the selected category in the URL.
 
-kategoriLink.textContent viser kategorinavnet som linkets tekst.
+categoryLink.textContent sets the category name as the link text.
 
-appendChild() indsætter kategorilinket i containeren på forsiden.
+appendChild() inserts the category link into the container on the home page.
 
-visFejl() skriver en fejlbesked i kategorilisten, hvis data ikke kan hentes.
+showError() displays a message in the category list if the data cannot be loaded.
 */

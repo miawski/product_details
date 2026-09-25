@@ -132,13 +132,13 @@ body.home-body {
   font-size: 1.6rem;
 }
 
-#catListeContainer {
+#categoryListContainer {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-#catListeContainer a {
+#categoryListContainer a {
   display: grid;
   min-height: 165px;
   place-items: center;
@@ -152,8 +152,8 @@ body.home-body {
   transition: background-color 160ms ease, transform 160ms ease;
 }
 
-#catListeContainer a:hover,
-#catListeContainer a:focus-visible {
+#categoryListContainer a:hover,
+#categoryListContainer a:focus-visible {
   background: #eadb5d;
   transform: translateY(-2px);
 }
@@ -161,17 +161,17 @@ body.home-body {
 /*
 Forklaring:
 
-.home-body .home-page afgrænser indholdets bredde og giver luft omkring kategorierne.
+.home-body .home-page limits the content width and adds space around the categories.
 
-.home-page > h1 styler sidens hovedoverskrift NPC.
+.home-page > h1 styles the NPC page heading.
 
-.categories-section h2 styler overskriften for kategorierne.
+.categories-section h2 styles the category section heading.
 
-#catListeContainer opstiller kategorilinkene i tre lige brede kolonner med mellemrum.
+#categoryListContainer places category links in three equal columns with spacing.
 
-#catListeContainer a gør hvert link til et stort, centreret orange kategori-felt.
+#categoryListContainer a makes each link a large, centered orange category tile.
 
-hover og focus-visible giver en diskret farve- og bevægelseseffekt ved mus og tastatur.
+hover and focus-visible add subtle color and movement effects for mouse and keyboard interaction.
 */
 
 @media (max-width: 700px) {
