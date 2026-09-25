@@ -3,7 +3,7 @@ const categoryTitle = document.querySelector("#category-title");
 const endpoint = cat
   ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}`
   : "https://kea-alt-del.dk/t7/api/products?limit=20";
-const produktliste = document.querySelector(".produktliste");
+const productList = document.querySelector(".product-list");
 
 if (cat) {
   categoryTitle.textContent = cat;
@@ -13,84 +13,84 @@ if (cat) {
 
 fetch(endpoint)
   .then((response) => response.json())
-  .then(visProdukter)
-  .catch(visFejl);
+  .then(renderProducts)
+  .catch(showError);
 
-function visProdukter(produkter) {
-  produktliste.innerHTML = produkter.map(lavProduktKort).join("");
+function renderProducts(products) {
+  productList.innerHTML = products.map(createProductCard).join("");
 }
 
-function lavProduktKort(produkt) {
-  const billede = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
-  const rabatPris = Math.round(produkt.price - (produkt.price * produkt.discount) / 100);
-  const pris = produkt.discount ? `<p class="price"><span class="old-price">${produkt.price} kr.</span> ${rabatPris} kr.</p>` : `<p class="price">${produkt.price} kr.</p>`;
-  const udsolgtClass = produkt.soldout ? " sold-out" : "";
-  const udsolgtTekst = produkt.soldout ? `<p class="status">Udsolgt</p>` : "";
+function createProductCard(product) {
+  const image = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
+  const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
+  const price = product.discount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
+  const soldOutClass = product.soldout ? " sold-out" : "";
+  const soldOutText = product.soldout ? `<p class="status">Sold out</p>` : "";
 
   return `
-    <article class="product-card${udsolgtClass}">
-      <a href="productdetails.html?id=${produkt.id}">
-        <img class="product-image-${produkt.id}" src="${billede}" alt="${produkt.productdisplayname}" />
+    <article class="product-card${soldOutClass}">
+      <a href="productdetails.html?id=${product.id}">
+        <img class="product-image-${product.id}" src="${image}" alt="${product.productdisplayname}" />
         <div class="product-info">
-          <p class="brand">${produkt.brandname}</p>
-          <h2>${produkt.productdisplayname}</h2>
-          <p class="category">${produkt.articletype} / ${produkt.subcategory}</p>
-          ${pris}
-          ${udsolgtTekst}
+          <p class="brand">${product.brandname}</p>
+          <h2>${product.productdisplayname}</h2>
+          <p class="category">${product.articletype} / ${product.subcategory}</p>
+          ${price}
+          ${soldOutText}
         </div>
       </a>
     </article>
   `;
 }
 
-function visFejl() {
-  produktliste.innerHTML = "<p>Produkterne kunne ikke hentes lige nu.</p>";
+function showError() {
+  productList.innerHTML = "<p>Products could not be loaded right now.</p>";
 }
 
 /*
-Forklaring:
+Explanation:
 
-cat læser den valgte kategori fra sidens URL-parameter.
+cat reads the selected category from the page's URL parameter.
 
-categoryTitle finder overskriften, hvor den valgte kategori vises.
+categoryTitle selects the heading where the selected category is displayed.
 
-endpoint bruger kategori-API'et, når der er valgt en kategori, og standardlisten ellers.
+endpoint uses the category API when a category is selected, and the default list otherwise.
 
-const produktliste finder HTML-elementet, hvor produktkortene skal sættes ind.
+productList selects the HTML element where product cards are inserted.
 
-categoryTitle.textContent viser kategorinavnet på produktlistesiden.
+categoryTitle.textContent displays the category name on the product list page.
 
-categoryTitle.hidden skjuler kategorioverskriften, når siden åbnes uden en valgt kategori.
+categoryTitle.hidden hides the category heading when the page opens without a selected category.
 
-fetch(endpoint) henter produkterne fra API'et.
+fetch(endpoint) requests the products from the API.
 
-.then((response) => response.json()) laver API-svaret om til JavaScript-data.
+.then((response) => response.json()) converts the API response into JavaScript data.
 
-.then(visProdukter) sender produkt-arrayet videre til funktionen visProdukter.
+.then(renderProducts) passes the product array to renderProducts.
 
-.catch(visFejl) kører visFejl, hvis data ikke kan hentes.
+.catch(showError) runs showError if the data cannot be loaded.
 
-visProdukter(produkter) modtager arrayet med produkter.
+renderProducts(products) receives the product array.
 
-produkter.map(lavProduktKort) kører lavProduktKort én gang for hvert produkt.
+products.map(createProductCard) runs createProductCard once for each product.
 
-.join("") samler alle produktkort til én samlet HTML-tekst.
+.join("") combines all product cards into one HTML string.
 
-lavProduktKort(produkt) modtager ét produkt ad gangen som parameter.
+createProductCard(product) receives one product at a time as a parameter.
 
-billede bygger produktets billed-URL ud fra produkt.id.
+image builds the product image URL from product.id.
 
-rabatPris regner den nye pris ud, hvis produktet har rabat.
+discountedPrice calculates the reduced price when a product has a discount.
 
-pris vælger HTML for normal pris eller rabatpris.
+price selects the HTML for the regular or discounted price.
 
-udsolgtClass tilføjer CSS-classen sold-out, hvis produktet er udsolgt.
+soldOutClass adds the sold-out CSS class when the product is sold out.
 
-udsolgtTekst laver teksten "Udsolgt", hvis produktet er udsolgt.
+soldOutText displays "Sold out" when the product is sold out.
 
-return sender HTML-strukturen for produktkortet tilbage til map().
+return sends the product card HTML back to map().
 
-Linket bruger productdetails.html?id=${produkt.id}, så detaljesiden ved hvilket produkt der skal vises.
+The link uses productdetails.html?id=${product.id}, so the details page knows which product to display.
 
-visFejl() viser en fejlbesked i produktlisten, hvis API'et fejler.
+showError() displays an error message in the product list if the API request fails.
 */

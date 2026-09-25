@@ -9,102 +9,102 @@ backbutton.addEventListener("click", () => history.back());
 if (id) {
   fetch(endpoint)
     .then((response) => response.json())
-    .then(visProdukt)
-    .catch(visFejl);
+    .then(renderProduct)
+    .catch(showError);
 } else {
-  visFejl();
+  showError();
 }
 
-function visProdukt(produkt) {
-  const billede = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
-  const harRabat = produkt.discount > 0;
-  const rabatPris = Math.round(produkt.price - (produkt.price * produkt.discount) / 100);
-  const pris = harRabat ? `<p class="price"><span class="old-price">${produkt.price} kr.</span> ${rabatPris} kr.</p>` : `<p class="price">${produkt.price} kr.</p>`;
-  const udsolgtTekst = produkt.soldout ? `<p class="status">Udsolgt</p>` : "";
-  const detaljer = [
-    ["Mærke", produkt.brandname],
-    ["Kategori", produkt.category],
-    ["Underkategori", produkt.subcategory],
-    ["Type", produkt.articletype],
-    ["Køn", produkt.gender],
-    ["Sæson", produkt.season],
-    ["År", produkt.productionyear],
-    ["Brug", produkt.usagetype],
+function renderProduct(productData) {
+  const image = `https://kea-alt-del.dk/t7/images/webp/640/${productData.id}.webp`;
+  const hasDiscount = productData.discount > 0;
+  const discountedPrice = Math.round(productData.price - (productData.price * productData.discount) / 100);
+  const price = hasDiscount ? `<p class="price"><span class="old-price">${productData.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${productData.price} DKK</p>`;
+  const soldOutText = productData.soldout ? `<p class="status">Sold out</p>` : "";
+  const details = [
+    ["Brand", productData.brandname],
+    ["Category", productData.category],
+    ["Subcategory", productData.subcategory],
+    ["Type", productData.articletype],
+    ["Gender", productData.gender],
+    ["Season", productData.season],
+    ["Year", productData.productionyear],
+    ["Usage", productData.usagetype],
   ]
-    .filter((detalje) => detalje[1])
-    .map((detalje) => `<dt>${detalje[0]}</dt><dd>${detalje[1]}</dd>`)
+    .filter((detail) => detail[1])
+    .map((detail) => `<dt>${detail[0]}</dt><dd>${detail[1]}</dd>`)
     .join("");
 
   product.innerHTML = `
     <section class="product-detail">
-      <img class="detail-image product-image-${produkt.id}" src="${billede}" alt="${produkt.productdisplayname}" />
+      <img class="detail-image product-image-${productData.id}" src="${image}" alt="${productData.productdisplayname}" />
       <div class="detail-info">
-        <p class="brand">${produkt.brandname}</p>
-        <h1>${produkt.productdisplayname}</h1>
-        ${pris}
-        ${udsolgtTekst}
+        <p class="brand">${productData.brandname}</p>
+        <h1>${productData.productdisplayname}</h1>
+        ${price}
+        ${soldOutText}
         <dl class="detail-list">
-          ${detaljer}
+          ${details}
         </dl>
       </div>
     </section>
   `;
 }
 
-function visFejl() {
+function showError() {
   product.innerHTML = `
-    <h1>Produktet blev ikke fundet</h1>
+    <h1>Product not found</h1>
   `;
 }
 
 /*
-Forklaring:
+Explanation:
 
-URLSearchParams(window.location.search) læser query string fra URL'en.
+URLSearchParams(window.location.search) reads the query string from the URL.
 
-params.get("id") henter produktets id fra URL'en, fx 1163 fra productdetails.html?id=1163.
+params.get("id") reads the product ID from the URL, for example 1163 from productdetails.html?id=1163.
 
-endpoint gemmer API-adressen til det specifikke produkt.
+endpoint stores the API address for the selected product.
 
-product finder HTML-elementet, hvor produktdetaljerne skal vises.
+product selects the HTML element where the product details will appear.
 
-backbutton finder tilbage-knappen i HTML.
+backbutton selects the back button in the HTML.
 
-backbutton.addEventListener("click", () => history.back()) sender brugeren tilbage til den side, de kom fra.
+backbutton.addEventListener("click", () => history.back()) returns the user to the previous page.
 
-if (id) tjekker om der faktisk findes et produkt-id i URL'en.
+if (id) checks whether the URL contains a product ID.
 
-fetch(endpoint) henter data for ét bestemt produkt.
+fetch(endpoint) requests data for one specific product.
 
-.then((response) => response.json()) laver API-svaret om til JavaScript-data.
+.then((response) => response.json()) converts the API response into JavaScript data.
 
-.then(visProdukt) sender produkt-objektet videre til funktionen visProdukt.
+.then(renderProduct) passes the product object to renderProduct.
 
-.catch(visFejl) viser fejlbeskeden, hvis produktet ikke kan hentes.
+.catch(showError) displays an error message if the product cannot be loaded.
 
-else visFejl() kører, hvis URL'en mangler et id.
+else showError() runs if the URL does not contain an ID.
 
-visProdukt(produkt) modtager ét produkt som parameter.
+renderProduct(productData) receives one product as a parameter.
 
-billede bygger produktets billed-URL ud fra produkt.id.
+image builds the product image URL from productData.id.
 
-harRabat gemmer true eller false alt efter om produkt.discount er større end 0.
+hasDiscount stores true or false depending on whether productData.discount is greater than 0.
 
-rabatPris regner produktets pris efter rabat.
+discountedPrice calculates the product price after the discount.
 
-pris vælger HTML for normal pris eller rabatpris.
+price selects the HTML for the regular or discounted price.
 
-udsolgtTekst laver teksten "Udsolgt", hvis produktet er udsolgt.
+soldOutText displays "Sold out" when the product is sold out.
 
-detaljer er et array med de produktoplysninger, der skal vises i detail-listen.
+details is an array containing the product information to display in the details list.
 
-.filter((detalje) => detalje[1]) fjerner oplysninger uden værdi.
+.filter((detail) => detail[1]) removes details that do not have a value.
 
-.map((detalje) => ...) laver hver oplysning om til dt/dd HTML.
+.map((detail) => ...) converts each detail into dt/dd HTML.
 
-.join("") samler alle detail-linjerne til én HTML-tekst.
+.join("") combines all detail rows into one HTML string.
 
-product.innerHTML indsætter hele produktvisningen på siden.
+product.innerHTML inserts the complete product view into the page.
 
-visFejl() indsætter en tilbage-link og en fejlbesked, hvis produktet ikke findes.
+showError() displays an error message if the product cannot be found.
 */

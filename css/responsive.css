@@ -4,7 +4,7 @@
     width: min(100% - 3rem, 980px);
   }
 
-  .produktliste {
+  .product-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4rem 2rem;
   }
@@ -52,7 +52,7 @@
     padding: 1.5rem 0 1.8rem;
   }
 
-  .produktliste {
+  .product-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3.5rem 1.5rem;
   }
@@ -141,7 +141,7 @@
     line-height: 0.95;
   }
 
-  .produktliste {
+  .product-list {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
@@ -262,7 +262,7 @@
     width: min(100% - 2rem, 760px);
   }
 
-  #catListeContainer {
+  #categoryListContainer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -283,11 +283,11 @@
     font-size: 1.3rem;
   }
 
-  #catListeContainer {
+  #categoryListContainer {
     gap: 0.75rem;
   }
 
-  #catListeContainer a {
+  #categoryListContainer a {
     min-height: 120px;
     padding: 0.8rem;
     font-size: 0.95rem;
@@ -295,7 +295,7 @@
 }
 
 @media (max-width: 360px) {
-  #catListeContainer {
+  #categoryListContainer {
     grid-template-columns: 1fr;
   }
 }
@@ -303,9 +303,9 @@
 /*
 Forklaring:
 
-Ved maks. 900 px bliver kategori-grid'et to kolonner, og forsideindholdet bliver smallere.
+At 900 px and below, the category grid switches to two columns and the page content narrows.
 
-Ved maks. 600 px tilpasses overskrifter, afstande og kategori-felter til en mobilskærm.
+At 600 px and below, headings, spacing, and category tiles are adjusted for mobile screens.
 
-Ved maks. 360 px vises kategorierne i én kolonne, så teksten ikke klemmes eller flyder ud.
+At 360 px and below, categories display in one column so text does not get cramped or overflow.
 */

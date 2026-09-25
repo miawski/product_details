@@ -216,67 +216,67 @@ body.home-body .site-header {
 /*
 Forklaring:
 
-:root gemmer farver, skygge og transition-hastighed som CSS-variabler, så de samme værdier kan genbruges flere steder.
+:root stores colors, shadows, and transition timing as CSS variables so values can be reused.
 
-.site-header gør navigationen sticky med top: 0, så headeren bliver siddende øverst, når man scroller.
+.site-header makes the navigation sticky with top: 0 so it remains at the top while scrolling.
 
-.site-header bruger z-index, så headeren ligger over sidens indhold.
+.site-header uses z-index to place the header above the page content.
 
-.site-header bruger backdrop-filter og en næsten hvid baggrund, så den føles som en moderne fast navigation.
+.site-header uses backdrop-filter and a near-white background for a modern fixed navigation appearance.
 
-.site-header:hover tilføjer skygge, så headeren får dybde, når brugeren interagerer med den.
+.site-header:hover adds a shadow to give the header depth during interaction.
 
-.logo, nav-links, primary-link, back-link og product-card a får transitions, så hover og klik føles blødere.
+.logo, navigation links, primary-link, back-link, and product-card links get transitions for smoother interaction.
 
-.logo:hover løfter logoet en smule, så det føles klikbart.
+.logo:hover lifts the logo slightly to indicate that it is clickable.
 
-.site-header nav a får pilleformet border-radius, så hover-fladen ligner en moderne navigationsknap.
+.site-header nav a gets a pill-shaped border radius for a modern navigation button.
 
-.site-header nav a:hover ændrer nav-linket til sort baggrund og hvid tekst, så interaktionen er tydelig.
+.site-header nav a:hover changes the link to a black background with white text for clear feedback.
 
-:focus-visible giver tastaturbrugere en tydelig gul fokusmarkering på links, knapper og produktkort.
+:focus-visible gives keyboard users a clear yellow focus indicator on links, buttons, and product cards.
 
-.primary-link:hover ændrer den sorte CTA-knap til gul, tilføjer skygge og løfter knappen en smule.
+.primary-link:hover changes the black CTA button to yellow, adds a shadow, and lifts it slightly.
 
-:active på knapper og nav-links nulstiller løftet, så klik føles fysisk og responsivt.
+:active resets the lift on buttons and navigation links to make clicks feel responsive.
 
-.back-link styler tilbage-knappen som en tydelig UX-knap med sort baggrund, hvid tekst, rund form og skygge.
+.back-link styles the back button with a black background, white text, a rounded shape, and a shadow.
 
-.back-link::before tegner den runde gule ikon-baggrund inde i tilbage-knappen.
+.back-link::before draws the circular yellow icon background inside the back button.
 
-.back-link::after tegner selve tilbage-pilen med CSS-border, så ikonet er visuelt og ikke ekstra tekst.
+.back-link::after draws the back arrow with CSS borders, avoiding extra text for the icon.
 
-.back-link:hover vender farverne om, så knappen reagerer tydeligt ved hover.
+.back-link:hover reverses the colors to provide clear hover feedback.
 
-.back-link:hover::before ændrer ikon-baggrunden, så den passer til knappens hover-state.
+.back-link:hover::before changes the icon background to match the button hover state.
 
-.back-link:hover::after ændrer pilens farve, så den stadig har kontrast på hover.
+.back-link:hover::after changes the arrow color to maintain contrast on hover.
 
-.product-card a får rundet klikområde, så hover-effekten følger kortets form.
+.product-card a gets a rounded clickable area so the hover effect follows the card shape.
 
-.product-card a:hover løfter produktkortet, så brugeren kan se, at hele kortet er klikbart.
+.product-card a:hover lifts the product card to show that the entire card is clickable.
 
-.product-card img og .detail-image får transitions, så billedeffekter ikke springer brat.
+.product-card img and .detail-image get transitions so image effects do not change abruptly.
 
-.product-card a:hover img giver produktbilledet skygge og en diskret scale-effekt på hover.
+.product-card a:hover img adds a shadow and a subtle scale effect to the product image.
 
-.detail-image:hover giver detaljebilledet samme visuelle dybde som produktkortene.
+.detail-image:hover gives the detail image the same visual depth as the product cards.
 
-body:not(.home-body) .site-header strækker headerbaggrunden over hele viewportens bredde og holder indholdet ud for sidens maksbredde.
+body:not(.home-body) .site-header stretches the header background across the viewport and aligns content to the page width.
 
-body.home-body .site-header gør det samme på forsiden med forsidens bredere maksbredde.
+body.home-body .site-header does the same on the home page using its wider content width.
 
-border-radius: 0 fjerner afrundede hjørner, så headerbaggrunden går helt ud til skærmens kanter.
+border-radius: 0 removes rounded corners so the header background reaches the screen edges.
 
-@media (max-width: 600px) tilpasser header og tilbage-knap til små mobilskærme.
+@media (max-width: 600px) adapts the header and back button to small mobile screens.
 
-Padding-reglerne ved 600px og 380px holder headerindholdet inden for skærmen på smalle mobiler.
+The padding rules at 600px and 380px keep header content within narrow mobile screens.
 
-display, align-items og justify-content centrerer teksten i navigationsknappen både vandret og lodret.
+display, align-items, and justify-content center navigation button text horizontally and vertically.
 
-padding med samme værdi på begge sider fjerner den skæve venstre-padding fra den generelle headerregel.
+Equal horizontal padding removes the uneven left padding from the general header rule.
 
-line-height og text-align holder knappens tekst centreret og stabil ved hover.
+line-height and text-align keep button text centered and stable on hover.
 
-@media (prefers-reduced-motion: reduce) fjerner animationer for brugere, der har valgt reduceret bevægelse i deres system.
+@media (prefers-reduced-motion: reduce) removes animations for users who prefer reduced motion.
 */
