@@ -55,7 +55,13 @@ body.home-body .site-header {
 }
 
 .site-header nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.15rem;
   border-radius: 999px;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .site-header nav a:hover {
@@ -265,6 +271,12 @@ border-radius: 0 fjerner afrundede hjørner, så headerbaggrunden går helt ud t
 @media (max-width: 600px) tilpasser header og tilbage-knap til små mobilskærme.
 
 Padding-reglerne ved 600px og 380px holder headerindholdet inden for skærmen på smalle mobiler.
+
+display, align-items og justify-content centrerer teksten i navigationsknappen både vandret og lodret.
+
+padding med samme værdi på begge sider fjerner den skæve venstre-padding fra den generelle headerregel.
+
+line-height og text-align holder knappens tekst centreret og stabil ved hover.
 
 @media (prefers-reduced-motion: reduce) fjerner animationer for brugere, der har valgt reduceret bevægelse i deres system.
 */
