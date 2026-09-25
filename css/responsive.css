@@ -256,3 +256,56 @@
     font-size: 0.68rem;
   }
 }
+
+@media (max-width: 900px) {
+  .home-body .home-page {
+    width: min(100% - 2rem, 760px);
+  }
+
+  #catListeContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .home-body .home-page {
+    width: min(100% - 1.25rem, 420px);
+    padding-top: 0.5rem;
+  }
+
+  .home-page > h1 {
+    margin-bottom: 1.8rem;
+    font-size: 3.2rem;
+  }
+
+  .categories-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  #catListeContainer {
+    gap: 0.75rem;
+  }
+
+  #catListeContainer a {
+    min-height: 120px;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #catListeContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+Forklaring:
+
+Ved maks. 900 px bliver kategori-grid'et to kolonner, og forsideindholdet bliver smallere.
+
+Ved maks. 600 px tilpasses overskrifter, afstande og kategori-felter til en mobilskærm.
+
+Ved maks. 360 px vises kategorierne i én kolonne, så teksten ikke klemmes eller flyder ud.
+*/

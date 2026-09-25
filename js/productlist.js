@@ -1,5 +1,15 @@
-const endpoint = "https://kea-alt-del.dk/t7/api/products?limit=20";
+const cat = new URLSearchParams(window.location.search).get("cat");
+const categoryTitle = document.querySelector("#category-title");
+const endpoint = cat
+  ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}`
+  : "https://kea-alt-del.dk/t7/api/products?limit=20";
 const produktliste = document.querySelector(".produktliste");
+
+if (cat) {
+  categoryTitle.textContent = cat;
+} else {
+  categoryTitle.hidden = true;
+}
 
 fetch(endpoint)
   .then((response) => response.json())
@@ -40,9 +50,17 @@ function visFejl() {
 /*
 Forklaring:
 
-const endpoint gemmer API-adressen til produktlisten.
+cat læser den valgte kategori fra sidens URL-parameter.
+
+categoryTitle finder overskriften, hvor den valgte kategori vises.
+
+endpoint bruger kategori-API'et, når der er valgt en kategori, og standardlisten ellers.
 
 const produktliste finder HTML-elementet, hvor produktkortene skal sættes ind.
+
+categoryTitle.textContent viser kategorinavnet på produktlistesiden.
+
+categoryTitle.hidden skjuler kategorioverskriften, når siden åbnes uden en valgt kategori.
 
 fetch(endpoint) henter produkterne fra API'et.
 
