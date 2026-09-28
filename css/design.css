@@ -149,7 +149,9 @@ body.home-body {
   font-weight: 700;
   text-align: center;
   text-decoration: none;
-  transition: background-color 160ms ease, transform 160ms ease;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
 #categoryListContainer a:hover,

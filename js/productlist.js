@@ -1,8 +1,6 @@
 const cat = new URLSearchParams(window.location.search).get("cat");
 const categoryTitle = document.querySelector("#category-title");
-const endpoint = cat
-  ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}`
-  : "https://kea-alt-del.dk/t7/api/products?limit=20";
+const endpoint = cat ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}` : "https://kea-alt-del.dk/t7/api/products?limit=20";
 const productList = document.querySelector(".product-list");
 
 if (cat) {
