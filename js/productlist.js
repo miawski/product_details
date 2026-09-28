@@ -30,7 +30,7 @@ function createProductCard(product) {
   const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
   const price = hasDiscount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
   const discountLabel = product.discount ? `<p class="tilbudlabel">-${discountPercentage}%</p>` : "";
-  const offerText = hasDiscount ? `<p class="status offer-status">On offer</p>` : "";
+  const offerText = hasDiscount ? `<p class="status offer-status">Sale</p>` : "";
   const soldOutText = isSoldOut ? `<p class="status">Sold out</p>` : "";
 
   return `
@@ -102,7 +102,7 @@ discountLabel follows the teacher's conditional template pattern and creates a p
 
 price selects regular or discounted price markup based on hasDiscount.
 
-offerText displays "On offer" only when hasDiscount is true.
+offerText displays "Sale" only when hasDiscount is true.
 
 The article class uses the teacher's direct conditional pattern: product.soldout ? "udsolgt" : "". A true value adds the udsolgt CSS class to the product card; false leaves that class empty. The card and product-card classes preserve the site's existing card styling.
 
