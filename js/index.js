@@ -29,7 +29,6 @@ async function renderCategories(categories) {
     const params = new URLSearchParams({ cat: category.category });
     const caption = document.createElement("div");
     const categoryName = document.createElement("h3");
-    const arrow = document.createElement("span");
     const product = samples[index];
 
     categoryLink.className = "category-card";
@@ -44,10 +43,7 @@ async function renderCategories(categories) {
 
     caption.className = "category-caption";
     categoryName.textContent = category.category;
-    arrow.className = "category-arrow";
-    arrow.setAttribute("aria-hidden", "true");
-    arrow.textContent = "→";
-    caption.append(categoryName, arrow);
+    caption.appendChild(categoryName);
     categoryLink.appendChild(caption);
     categoryListContainer.appendChild(categoryLink);
   });
@@ -145,7 +141,7 @@ URLSearchParams creates an encoded cat parameter, including when a category name
 
 categoryLink.href sends the user to productlist.html with the selected category in the URL.
 
-categoryLink.textContent sets the category name as the link text.
+categoryName sets the category label, and caption contains only that label without an arrow.
 
 appendChild() inserts the category link into the container on the home page.
 
