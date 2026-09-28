@@ -109,8 +109,6 @@ body.home-body .site-header {
   position: absolute;
   left: 0.9rem;
   top: 50%;
-  display: grid;
-  place-items: center;
   width: 1.35rem;
   height: 1.35rem;
   border-radius: 999px;
@@ -165,6 +163,35 @@ body.home-body .site-header {
   transform: scale(1.015);
 }
 
+.home-body .category-card {
+  border-radius: 10px;
+  transition:
+    transform var(--ux-fast),
+    box-shadow var(--ux-fast);
+}
+
+.home-body .category-card img {
+  transition:
+    box-shadow var(--ux-fast),
+    transform var(--ux-fast);
+}
+
+.home-body .category-card:hover,
+.home-body .category-card:focus-visible {
+  transform: translateY(-8px);
+}
+
+.home-body .category-card:hover img,
+.home-body .category-card:focus-visible img {
+  box-shadow: var(--ux-shadow);
+  transform: scale(1.015);
+}
+
+.home-body .category-card:focus-visible {
+  outline: 3px solid var(--ux-yellow);
+  outline-offset: 5px;
+}
+
 .detail-image:hover {
   box-shadow: var(--ux-shadow);
 }
@@ -199,7 +226,9 @@ body.home-body .site-header {
   .back-link,
   .product-card a,
   .product-card img,
-  .detail-image {
+  .detail-image,
+  .home-body .category-card,
+  .home-body .category-card img {
     transition: none;
   }
 
@@ -208,7 +237,9 @@ body.home-body .site-header {
   .primary-link:hover,
   .back-link:hover,
   .product-card a:hover,
-  .product-card a:hover img {
+  .product-card a:hover img,
+  .home-body .category-card:hover,
+  .home-body .category-card:hover img {
     transform: none;
   }
 }
@@ -272,11 +303,17 @@ border-radius: 0 removes rounded corners so the header background reaches the sc
 
 The padding rules at 600px and 380px keep header content within narrow mobile screens.
 
-display, align-items, and justify-content center navigation button text horizontally and vertically.
+align-items and justify-content center navigation button text horizontally and vertically.
 
 Equal horizontal padding removes the uneven left padding from the general header rule.
 
 line-height and text-align keep button text centered and stable on hover.
 
 @media (prefers-reduced-motion: reduce) removes animations for users who prefer reduced motion.
+
+.home-body .category-card uses the same hover motion as product cards: the whole link lifts 8px, and its image scales to 1.015 with the shared UX shadow.
+
+.home-body .category-card:focus-visible applies the same image and lift feedback and adds a yellow outline for keyboard navigation.
+
+The reduced-motion rules disable category transitions and movement when the visitor requests less animation.
 */

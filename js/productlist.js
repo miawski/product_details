@@ -15,27 +15,33 @@ fetch(endpoint)
   .catch(showError);
 
 function renderProducts(products) {
-  productList.innerHTML = products.map(createProductCard).join("");
+  productList.innerHTML = "";
+  console.log(products);
+  products.forEach((product) => {
+    productList.innerHTML += createProductCard(product);
+  });
 }
 
 function createProductCard(product) {
   const image = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
   const hasDiscount = Number(product.discount) > 0;
+  const discountPercentage = Math.round(Number(product.discount));
   const isSoldOut = Boolean(product.soldout);
   const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
   const price = hasDiscount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
+  const discountLabel = product.discount ? `<p class="tilbudlabel">-${discountPercentage}%</p>` : "";
   const offerText = hasDiscount ? `<p class="status offer-status">On offer</p>` : "";
-  const soldOutClass = isSoldOut ? " sold-out" : "";
   const soldOutText = isSoldOut ? `<p class="status">Sold out</p>` : "";
 
   return `
-    <article class="product-card${soldOutClass}">
+    <article class="card ${product.soldout ? "udsolgt" : ""} product-card">
       <a href="productdetails.html?id=${product.id}">
+        ${discountLabel}
         <img class="product-image-${product.id}" src="${image}" alt="${product.productdisplayname}" />
         <div class="product-info">
-          <p class="brand">${product.brandname}</p>
           <h2>${product.productdisplayname}</h2>
-          <p class="category">${product.articletype} / ${product.subcategory}</p>
+          <h3 class="brand">${product.brandname}</h3>
+          <p class="category">${product.subcategory}</p>
           ${offerText}
           ${price}
           ${soldOutText}
@@ -74,9 +80,11 @@ fetch(endpoint) requests the products from the API.
 
 renderProducts(products) receives the product array.
 
-products.map(createProductCard) runs createProductCard once for each product.
+console.log(products) prints the received product data in the browser console, as in the teacher's example.
 
-.join("") combines all product cards into one HTML string.
+products.forEach() runs createProductCard once for each product.
+
+productList.innerHTML += adds each generated product card to the product list.
 
 createProductCard(product) receives one product at a time as a parameter.
 
@@ -88,19 +96,25 @@ isSoldOut converts the API soldout value to a true/false value.
 
 discountedPrice calculates the reduced price using the API discount percentage.
 
+discountPercentage rounds the API discount to a whole percentage for the visual label.
+
+discountLabel follows the teacher's conditional template pattern and creates a percentage tilbudlabel only when product.discount is truthy.
+
 price selects regular or discounted price markup based on hasDiscount.
 
 offerText displays "On offer" only when hasDiscount is true.
 
-soldOutClass adds the sold-out CSS class only when isSoldOut is true.
+The article class uses the teacher's direct conditional pattern: product.soldout ? "udsolgt" : "". A true value adds the udsolgt CSS class to the product card; false leaves that class empty. The card and product-card classes preserve the site's existing card styling.
 
 soldOutText displays "Sold out" only when isSoldOut is true.
 
-return sends the product card HTML back to map().
+return sends the product card HTML back to the forEach() callback, where it is added to productList.
 
 The link uses productdetails.html?id=${product.id}, so the details page knows which product to display.
 
 showError() displays an error message in the product list if the API request fails.
 
 In the returned card, offerText, price, and soldOutText are inserted in the product information area. The offer and sold-out conditions are independent, so both messages can appear when both API values apply.
+
+discountLabel is inserted inside the product link before the image so CSS can position the tilbudlabel over the image area.
 */
