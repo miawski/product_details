@@ -4,21 +4,6 @@
     width: min(100% - 3rem, 980px);
   }
 
-  .product-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4rem 2rem;
-  }
-
-  .home-body .site-header,
-  .home-body .intro {
-    width: min(100% - 3rem, 980px);
-  }
-
-  .product-detail {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-    gap: 3rem;
-  }
-
   .detail-info {
     min-width: 0;
   }
@@ -27,19 +12,6 @@
     overflow-wrap: anywhere;
   }
 
-  .home-body .intro {
-    grid-template-columns: minmax(280px, 0.85fr) minmax(340px, 1fr);
-    min-height: 540px;
-    padding: 3rem 3rem 0;
-  }
-
-  .home-body .intro h1 {
-    font-size: clamp(4.8rem, 10vw, 7rem);
-  }
-
-  .home-body .intro-visual {
-    min-height: 480px;
-  }
 }
 
 @media (max-width: 900px) {
@@ -52,11 +24,6 @@
     padding: 1.5rem 0 1.8rem;
   }
 
-  .product-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 3.5rem 1.5rem;
-  }
-
   .product-card img {
     padding: 1.8rem 1.2rem 0;
     border-radius: 16px;
@@ -64,11 +31,6 @@
 
   .product-info {
     min-height: 0;
-  }
-
-  .product-detail {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
   }
 
   .detail-image {
@@ -81,32 +43,6 @@
     padding-top: 1rem;
   }
 
-  .home-body .site-header,
-  .home-body .intro {
-    width: min(100% - 2rem, 760px);
-  }
-
-  .home-body .intro {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    padding: 3rem 2.5rem 0;
-  }
-
-  .home-body .intro-copy {
-    padding-bottom: 2rem;
-  }
-
-  .home-body .intro h1 {
-    font-size: clamp(4.5rem, 15vw, 7rem);
-  }
-
-  .home-body .intro-visual {
-    min-height: 460px;
-  }
-
-  .home-body .intro-visual img {
-    object-position: center bottom;
-  }
 }
 
 @media (max-width: 600px) {
@@ -141,11 +77,6 @@
     line-height: 0.95;
   }
 
-  .product-list {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
   .product-card img {
     aspect-ratio: 4 / 5;
     padding: 1.4rem 1rem 0;
@@ -171,10 +102,6 @@
     padding: 1.5rem 1rem 0;
   }
 
-  .detail-info {
-    gap: 0.8rem;
-  }
-
   .detail-info h1 {
     font-size: clamp(2rem, 12vw, 3rem);
   }
@@ -183,51 +110,14 @@
     font-size: 1.15rem;
   }
 
-  .detail-list {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-
-  .home-body .site-header,
-  .home-body .intro {
-    width: min(100% - 1.25rem, 420px);
-  }
-
-  .home-body .site-header {
-    padding: 1rem 0 1.3rem;
-  }
-
-  .home-body .site-header nav a {
-    padding: 0.65rem 0.9rem;
-    font-size: 0.68rem;
-  }
-
   .home-body main {
     padding-bottom: 3.5rem;
-  }
-
-  .home-body .intro {
-    padding: 2rem 1.25rem 0;
-    border-radius: 18px;
-  }
-
-  .home-body .intro h1 {
-    font-size: clamp(4rem, 22vw, 5.8rem);
   }
 
   .home-body .primary-link {
     margin-top: 1.4rem;
     padding: 0.9rem 1.15rem;
     font-size: 0.75rem;
-  }
-
-  .home-body .intro-visual {
-    min-height: 340px;
-  }
-
-  .home-body .intro-visual::before,
-  .home-body .intro-visual::after {
-    font-size: 2.2rem;
   }
 
   .home-band {
@@ -238,17 +128,8 @@
 @media (max-width: 380px) {
   main,
   .site-header,
-  .home-body .site-header,
-  .home-body .intro {
+  .home-body .site-header {
     width: calc(100% - 1rem);
-  }
-
-  .home-body .intro {
-    padding-inline: 1rem;
-  }
-
-  .home-body .intro h1 {
-    font-size: clamp(3.4rem, 21vw, 4.7rem);
   }
 
   .home-body .primary-link,
@@ -258,54 +139,132 @@
 }
 
 @media (max-width: 900px) {
-  .home-body .home-page {
-    width: min(100% - 2rem, 760px);
+  .home-shell {
+    margin: 0 auto;
   }
 
-  #categoryListContainer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .home-hero {
+    margin: 0 1.5rem;
+  }
+
+  .brand-strip {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .categories-section {
+    width: calc(100% - 3rem);
   }
 }
 
 @media (max-width: 600px) {
-  .home-body .home-page {
-    width: min(100% - 1.25rem, 420px);
-    padding-top: 0.5rem;
+  .home-shell {
+    min-height: 100vh;
+    border-radius: 0;
   }
 
-  .home-page > h1 {
-    margin-bottom: 1.8rem;
-    font-size: 3.2rem;
+  .home-hero {
+    min-height: 470px;
+    margin: 0 1.25rem;
+    border-radius: 20px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    padding: 35px 20px 0;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+
+  .home-body .primary-link {
+    margin-top: 15px;
+  }
+
+  .hero-visual {
+    top: 150px;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .hero-model {
+    top: 0;
+    left: 50%;
+    width: auto;
+    max-width: 80%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translateX(-50%);
+  }
+
+  .hero-star {
+    width: 22px;
+    height: 22px;
+  }
+
+  .brand-strip {
+    min-height: 72px;
+    margin-top: 24px;
+    padding: 12px 1rem;
+    column-gap: 0.8rem;
+    row-gap: 0.5rem;
+  }
+
+  .brand-logo {
+    max-height: 28px;
+  }
+
+  .categories-section {
+    width: calc(100% - 2.5rem);
+    margin-top: 25px;
   }
 
   .categories-section h2 {
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin-bottom: 26px;
+    font-size: 1.25rem;
   }
 
-  #categoryListContainer {
-    gap: 0.75rem;
+  .category-caption h3 {
+    font-size: 0.85rem;
   }
 
-  #categoryListContainer a {
-    min-height: 120px;
-    padding: 0.8rem;
-    font-size: 0.95rem;
+  .home-body main {
+    padding-bottom: 3rem;
   }
 }
 
-@media (max-width: 360px) {
-  #categoryListContainer {
-    grid-template-columns: 1fr;
+@media (max-width: 380px) {
+  .home-hero {
+    min-height: 435px;
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  .hero-copy {
+    padding-right: 12px;
+    padding-left: 14px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.65rem;
+  }
+
+  .hero-model {
+    max-width: 88%;
+  }
+
+  .categories-section {
+    width: calc(100% - 1.5rem);
   }
 }
 
 /*
 Forklaring:
 
-At 900 px and below, the category grid switches to two columns and the page content narrows.
+At the home breakpoints, the hero changes from its desktop layout to a stacked mobile composition without changing category content.
 
-At 600 px and below, headings, spacing, and category tiles are adjusted for mobile screens.
-
-At 360 px and below, categories display in one column so text does not get cramped or overflow.
+Category card columns, image proportions, and the yellow brand strip adapt to tablet and phone widths. Header sizing and horizontal padding come from the shared site-header rules so all pages remain consistent.
 */

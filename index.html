@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/design.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/grid.css" />
     <link rel="stylesheet" href="css/uxui.css" />
   </head>
   <body class="home-body">
@@ -22,7 +23,22 @@
       </header>
 
       <main class="home-page">
-        <h1>NPC SHOP</h1>
+        <section class="home-hero" aria-labelledby="home-title">
+          <div class="hero-copy">
+            <h1 id="home-title"><span class="hero-word">NPC</span><span class="hero-word hero-word-highlight">SHOP</span></h1>
+            <a class="primary-link" href="productlist.html">Shop Now</a>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <img class="hero-model" src="img/home-hero-model.webp" alt="" />
+            <img class="hero-star hero-star-one" src="img/home-star.svg" alt="" />
+            <img class="hero-star hero-star-two" src="img/home-star.svg" alt="" />
+            <img class="hero-star hero-star-three" src="img/home-star.svg" alt="" />
+            <img class="hero-star hero-star-four" src="img/home-star.svg" alt="" />
+          </div>
+        </section>
+
+        <div class="brand-strip" aria-label="Brands in the product catalogue"></div>
+
         <section class="categories-section" aria-labelledby="categories-title">
           <h2 id="categories-title">Categories</h2>
           <div id="categoryListContainer" class="category-grid" aria-label="Product categories"></div>

@@ -75,12 +75,6 @@ main {
   text-transform: uppercase;
 }
 
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5.5rem 3.5rem;
-}
-
 .product-card {
   overflow: visible;
   background-color: transparent;
@@ -90,11 +84,32 @@ main {
 }
 
 .product-card a {
-  display: grid;
+  position: relative;
   height: 100%;
 }
 
+.tilbudlabel {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  padding: 1rem;
+  color: #101010;
+  background-color: yellow;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.product-card {
+  position: relative;
+  display: grid;
+  background-color: #ffffff;
+}
+
 .product-card img {
+  max-width: 100%;
   aspect-ratio: 484 / 704;
   object-fit: contain;
   object-position: center top;
@@ -108,8 +123,6 @@ main {
 }
 
 .product-info {
-  display: grid;
-  gap: 0.45rem;
   min-height: 132px;
   padding: 1.35rem 0 0;
 }
@@ -138,7 +151,6 @@ main {
 }
 
 .price {
-  align-self: end;
   margin: 0.7rem 0 0;
   font-size: 0.95rem;
   font-weight: 700;
@@ -151,13 +163,19 @@ main {
   text-decoration: line-through;
 }
 
-.sold-out {
-  opacity: 0.55;
+.udsolgt {
+  filter: grayscale(1);
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .status {
   color: #a12b2b;
   font-weight: 700;
+}
+
+.offer-status {
+  color: #9a6500;
 }
 
 .details-page {
@@ -191,13 +209,6 @@ main {
   text-transform: uppercase;
 }
 
-.product-detail {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
-  gap: 5rem;
-  align-items: start;
-}
-
 .detail-image {
   aspect-ratio: 484 / 704;
   object-fit: contain;
@@ -208,9 +219,6 @@ main {
 }
 
 .detail-info {
-  display: grid;
-  align-content: start;
-  gap: 1rem;
   padding-top: 1rem;
 }
 
@@ -227,15 +235,11 @@ main {
 }
 
 .detail-info .price {
-  align-self: auto;
   margin: 0.5rem 0 1rem;
   font-size: 1.4rem;
 }
 
 .detail-list {
-  display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  gap: 0.7rem 2rem;
   margin: 1.5rem 0 0;
   padding: 1.5rem 0 0;
 }
@@ -276,35 +280,21 @@ main {
     font-size: clamp(2.2rem, 14vw, 3rem);
   }
 
-  .product-list {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
-  }
-
-  .product-detail {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
   .detail-info h1 {
     font-size: clamp(2rem, 11vw, 3rem);
   }
-
-  .detail-list {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
 }
 
-@media (min-width: 701px) and (max-width: 1100px) {
-  .product-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: 3rem;
-    gap: 3.5rem;
-  }
+/*
+Forklaring:
 
-  .product-detail {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
-    gap: 3rem;
-  }
-}
+.product-card a uses position: relative as the positioning context for the conditional tilbudlabel.
+
+.tilbudlabel follows the teacher's absolute top/right positioning, 1rem padding, and yellow background; it displays the API discount percentage in the upper-right corner above the product image.
+
+z-index keeps the tilbudlabel in front of the image.
+
+.udsolgt applies grayscale, half opacity, and disables pointer events for sold-out product cards.
+
+.product-card uses a positioned grid container with a white background. The teacher's subgrid row span is not used because this page has a nested link wrapper and no matching explicit parent row tracks.
+*/

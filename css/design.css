@@ -2,129 +2,163 @@
 
 body.home-body {
   min-height: 100vh;
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
   background: #ffffff;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 .home-shell {
   width: 100%;
-  margin: 0 auto;
+  min-height: 100vh;
+  margin: 0;
+  overflow: clip;
   background: #ffffff;
-}
-
-.home-body .site-header {
-  width: min(1280px, calc(100% - 7.5rem));
-  padding: 2rem 0 1.8rem;
-}
-
-.home-body .logo {
-  width: 58px;
-}
-
-.home-body .site-header nav a {
-  padding: 0.7rem 1.15rem;
-  color: #ffffff;
-  background: #050505;
-  border-radius: 4px;
-  font-size: 0.72rem;
 }
 
 .home-body main {
   width: 100%;
-  padding: 0 0 5rem;
+  margin: 0;
+  padding: 0 0 68px;
 }
 
-.home-body .intro {
-  display: grid;
-  grid-template-columns: minmax(320px, 0.85fr) minmax(420px, 1fr);
-  align-items: center;
-  width: min(1280px, calc(100% - 7.5rem));
-  min-height: 620px;
-  margin: 0 auto 3.5rem;
-  padding: 4rem 4.5rem 0;
-  overflow: hidden;
-  background: #f4f6f5;
-  border-radius: 28px;
-}
-
-.home-body .intro-copy {
+.home-hero {
   position: relative;
-  z-index: 1;
-  align-self: center;
-  padding-bottom: 3.6rem;
+  min-height: 405px;
+  margin: 0 48px;
+  overflow: hidden;
+  border-radius: 25px;
+  background: #f4f6f5;
 }
 
-.home-body .intro h1 {
-  max-width: 430px;
-  font-size: clamp(5.5rem, 11vw, 9rem);
-  line-height: 0.88;
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  width: 48%;
+  padding: 108px 0 0 30px;
 }
 
-.home-body .intro h1 span {
-  display: inline;
-  padding: 0;
-  background: none;
+.hero-copy h1 {
+  display: grid;
+  justify-items: start;
+  gap: 0;
+  margin: 0;
+  color: #000000;
+  font-size: 45.6px;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.hero-word {
+  position: relative;
+  z-index: 0;
+  display: block;
+  padding: 0 8px;
+}
+
+.hero-word::before {
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  right: 0;
+  bottom: 5px;
+  left: 0;
+  background: #ffffff;
+  content: "";
+  transform: rotate(-2deg);
+}
+
+.hero-word-highlight::before {
+  background: #ebd96b;
 }
 
 .home-body .primary-link {
-  margin-top: 2.2rem;
-  padding: 1.05rem 1.65rem;
-  background: #050505;
+  margin-top: 23px;
+  padding: 10px 16px;
   border-radius: 5px;
+  background: #050505;
   font-size: 0.82rem;
+  font-weight: 500;
 }
 
-.home-body .intro-visual {
-  position: relative;
-  align-self: end;
-  height: 100%;
-  min-height: 560px;
-}
-
-.home-body .intro-visual::before,
-.home-body .intro-visual::after {
+.hero-visual {
   position: absolute;
-  color: #e4e4e4;
-  font-size: 3.2rem;
-  font-weight: 900;
-  line-height: 1;
-  content: "*";
+  top: 28px;
+  right: 0;
+  bottom: 0;
+  width: 54%;
+  overflow: hidden;
 }
 
-.home-body .intro-visual::before {
-  top: 2.2rem;
-  left: 1.4rem;
-}
-
-.home-body .intro-visual::after {
-  right: 0.4rem;
-  bottom: 3.6rem;
-}
-
-.home-body .intro-visual img {
+.hero-model {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  left: 50%;
+  width: auto;
+  max-width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
+  transform: translateX(-50%);
 }
 
-.home-band {
-  height: 96px;
-  background: #eadb5d;
+.hero-star {
+  position: absolute;
+  z-index: 1;
+  width: 28px;
+  height: 27px;
+  opacity: 0.48;
 }
 
-.home-body .home-page {
-  width: min(1280px, calc(100% - 7.5rem));
-  margin: 0 auto;
-  padding: 1rem 0 5rem;
+.hero-star-one {
+  top: 5px;
+  left: 10%;
 }
 
-.home-page > h1 {
-  margin: 0 0 2.5rem;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  line-height: 1;
+.hero-star-two {
+  top: 0;
+  right: 29%;
+}
+
+.hero-star-three {
+  right: 5%;
+  bottom: 15%;
+}
+
+.hero-star-four {
+  bottom: 4%;
+  left: 12%;
+}
+
+.brand-strip {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 82px;
+  margin-top: 36px;
+  padding: 16px 48px;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 16px 32px;
+  background: #ebd96b;
+}
+
+.brand-strip[hidden] {
+  display: none;
+}
+
+.brand-logo {
+  display: block;
+  width: min(150px, 20vw);
+  max-width: 150px;
+  height: 44px;
+  object-fit: contain;
+  filter: brightness(0);
+}
+
+.categories-section {
+  width: calc(100% - 96px);
+  margin: 32px auto 0;
 }
 
 .categories-section h2 {
@@ -154,65 +188,40 @@ body.home-body {
     transform 160ms ease;
 }
 
-#categoryListContainer a:hover,
-#categoryListContainer a:focus-visible {
-  background: #eadb5d;
-  transform: translateY(-2px);
+.categories-section h2::after {
+  position: absolute;
+  z-index: -1;
+  right: -4px;
+  bottom: -5px;
+  width: 44%;
+  height: 8px;
+  background: #ebd96b;
+  content: "";
+  transform: rotate(-2deg);
 }
 
 /*
 Forklaring:
 
-.home-body .home-page limits the content width and adds space around the categories.
+The home-shell contains the homepage sections; overflow: clip prevents horizontal overflow without creating a scroll container that can interrupt sticky positioning.
 
-.home-page > h1 styles the NPC page heading.
+The homepage uses the shared site-header rules from uxui.css, matching the sticky behavior and full-width background used on the other pages.
 
-.categories-section h2 styles the category section heading.
+The hero panel, yellow brand strip, and category heading use the reference layout and Poppins typography.
 
-#categoryListContainer places category links in three equal columns with spacing.
+The hero-word backgrounds reproduce the white and yellow tilted highlight shapes behind the heading.
 
-#categoryListContainer a makes each link a large, centered orange category tile.
+The hero-model uses the original Figma cutout image and fills the right side of the hero without cropping the source asset.
 
-hover and focus-visible add subtle color and movement effects for mouse and keyboard interaction.
+The star rules place the original Figma star graphic around the hero model.
+
+The brand strip uses a flexible, centered layout so the API-matched logos remain evenly spaced and wrap on narrow screens.
+
+Each logo is constrained to a consistent height; brightness(0) normalizes logo colors to the black treatment used by the design.
+
+The hidden state keeps the yellow band out of view when no API brands have a usable logo.
+
+The category heading underline reproduces the short yellow accent in the reference design.
+
+The homepage does not override the shared header dimensions, logo sizing, navigation-link colors, or hover behavior.
 */
-
-@media (max-width: 700px) {
-  body.home-body {
-    padding: 0;
-  }
-
-  .home-shell {
-    width: 100%;
-    border-radius: 0;
-  }
-
-  .home-body .site-header {
-    width: min(100% - 2rem, 1020px);
-    padding: 1.2rem 0;
-  }
-
-  .home-body .intro {
-    grid-template-columns: 1fr;
-    width: min(100% - 2rem, 1020px);
-    min-height: 0;
-    margin-bottom: 2rem;
-    padding: 2rem 1.4rem 0;
-    border-radius: 20px;
-  }
-
-  .home-body .intro-copy {
-    padding-bottom: 1.8rem;
-  }
-
-  .home-body .intro h1 {
-    font-size: clamp(4rem, 24vw, 6rem);
-  }
-
-  .home-body .intro-visual {
-    min-height: 320px;
-  }
-
-  .home-band {
-    height: 72px;
-  }
-}
