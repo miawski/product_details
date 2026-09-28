@@ -160,6 +160,10 @@ main {
   font-weight: 700;
 }
 
+.offer-status {
+  color: #9a6500;
+}
+
 .details-page {
   padding: 2rem 0 7rem;
 }

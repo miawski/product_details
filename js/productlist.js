@@ -1,8 +1,6 @@
 const cat = new URLSearchParams(window.location.search).get("cat");
 const categoryTitle = document.querySelector("#category-title");
-const endpoint = cat
-  ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}`
-  : "https://kea-alt-del.dk/t7/api/products?limit=20";
+const endpoint = cat ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}` : "https://kea-alt-del.dk/t7/api/products?limit=20";
 const productList = document.querySelector(".product-list");
 
 if (cat) {
@@ -22,10 +20,13 @@ function renderProducts(products) {
 
 function createProductCard(product) {
   const image = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
+  const hasDiscount = Number(product.discount) > 0;
+  const isSoldOut = Boolean(product.soldout);
   const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
-  const price = product.discount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
-  const soldOutClass = product.soldout ? " sold-out" : "";
-  const soldOutText = product.soldout ? `<p class="status">Sold out</p>` : "";
+  const price = hasDiscount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
+  const offerText = hasDiscount ? `<p class="status offer-status">On offer</p>` : "";
+  const soldOutClass = isSoldOut ? " sold-out" : "";
+  const soldOutText = isSoldOut ? `<p class="status">Sold out</p>` : "";
 
   return `
     <article class="product-card${soldOutClass}">
@@ -35,6 +36,7 @@ function createProductCard(product) {
           <p class="brand">${product.brandname}</p>
           <h2>${product.productdisplayname}</h2>
           <p class="category">${product.articletype} / ${product.subcategory}</p>
+          ${offerText}
           ${price}
           ${soldOutText}
         </div>
@@ -80,17 +82,25 @@ createProductCard(product) receives one product at a time as a parameter.
 
 image builds the product image URL from product.id.
 
-discountedPrice calculates the reduced price when a product has a discount.
+hasDiscount is true only when the API discount value is greater than zero.
 
-price selects the HTML for the regular or discounted price.
+isSoldOut converts the API soldout value to a true/false value.
 
-soldOutClass adds the sold-out CSS class when the product is sold out.
+discountedPrice calculates the reduced price using the API discount percentage.
 
-soldOutText displays "Sold out" when the product is sold out.
+price selects regular or discounted price markup based on hasDiscount.
+
+offerText displays "On offer" only when hasDiscount is true.
+
+soldOutClass adds the sold-out CSS class only when isSoldOut is true.
+
+soldOutText displays "Sold out" only when isSoldOut is true.
 
 return sends the product card HTML back to map().
 
 The link uses productdetails.html?id=${product.id}, so the details page knows which product to display.
 
 showError() displays an error message in the product list if the API request fails.
+
+In the returned card, offerText, price, and soldOutText are inserted in the product information area. The offer and sold-out conditions are independent, so both messages can appear when both API values apply.
 */
