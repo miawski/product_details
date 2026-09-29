@@ -227,6 +227,7 @@ body.home-body .site-header {
   .product-card a,
   .product-card img,
   .detail-image,
+  .gender-filter-buttons button,
   .home-body .category-card,
   .home-body .category-card img {
     transition: none;
@@ -238,10 +239,59 @@ body.home-body .site-header {
   .back-link:hover,
   .product-card a:hover,
   .product-card a:hover img,
+  .gender-filter-buttons button:hover,
+  .gender-filter-buttons button[aria-pressed="true"],
   .home-body .category-card:hover,
   .home-body .category-card:hover img {
     transform: none;
   }
+}
+
+/* Gender filters use the shared black, white, and yellow UX palette. */
+.gender-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.8rem;
+}
+
+.gender-filter-buttons button {
+  min-width: 5.5rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--ux-black);
+  border-radius: 999px;
+  color: var(--ux-black);
+  background-color: var(--ux-white);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition:
+    color var(--ux-fast),
+    background-color var(--ux-fast),
+    transform var(--ux-fast),
+    box-shadow var(--ux-fast);
+}
+
+.gender-filter-buttons button[aria-pressed="true"],
+.gender-filter-buttons button:hover {
+  color: var(--ux-black);
+  background-color: var(--ux-yellow);
+  box-shadow: 0 8px 20px rgba(15, 15, 15, 0.12);
+  transform: translateY(-2px);
+}
+
+.gender-filter-buttons button:focus-visible {
+  outline: 3px solid var(--ux-yellow);
+  outline-offset: 3px;
+}
+
+.product-count {
+  align-self: center;
+  margin-left: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /*
@@ -316,4 +366,12 @@ line-height and text-align keep button text centered and stable on hover.
 .home-body .category-card:focus-visible applies the same image and lift feedback and adds a yellow outline for keyboard navigation.
 
 The reduced-motion rules disable category transitions and movement when the visitor requests less animation.
+
+.gender-filter-buttons lays out the gender filters in a wrapping row so they stay usable on narrow screens.
+
+.gender-filter-buttons button styles the filters to match the site's black, white, and yellow interaction palette.
+
+The aria-pressed selector keeps the active gender filter highlighted; :hover and :focus-visible provide mouse and keyboard feedback.
+
+.product-count sits beside the filter buttons, keeps its label on one line, and remains vertically aligned with the controls.
 */

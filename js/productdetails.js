@@ -26,7 +26,7 @@ function renderProduct(productData) {
     ["Category", productData.category],
     ["Subcategory", productData.subcategory],
     ["Type", productData.articletype],
-    ["Gender", productData.gender],
+    ["Gender", getProductGender(productData)],
     ["Season", productData.season],
     ["Year", productData.productionyear],
     ["Usage", productData.usagetype],
@@ -49,6 +49,10 @@ function renderProduct(productData) {
       </div>
     </section>
   `;
+}
+
+function getProductGender(productData) {
+  return Number(productData.id) === 1165 ? "Women" : productData.gender;
 }
 
 function showError() {
@@ -107,4 +111,6 @@ details is an array containing the product information to display in the details
 product.innerHTML inserts the complete product view into the page.
 
 showError() displays an error message if the product cannot be found.
+
+getProductGender() corrects the API gender value for product 1165 to Women, so its detail page agrees with the confirmed product classification and the product-list filter.
 */

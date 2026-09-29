@@ -1,7 +1,13 @@
 const cat = new URLSearchParams(window.location.search).get("cat");
 const categoryTitle = document.querySelector("#category-title");
-const endpoint = cat ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}` : "https://kea-alt-del.dk/t7/api/products?limit=20";
+const endpoint = cat
+  ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}`
+  : "https://kea-alt-del.dk/t7/api/products";
 const productList = document.querySelector(".product-list");
+const genderButtons = document.querySelectorAll("#filtre button");
+const productCount = document.querySelector("#product-count");
+let allData;
+let udsnit;
 
 if (cat) {
   categoryTitle.textContent = cat;
@@ -9,17 +15,51 @@ if (cat) {
   categoryTitle.hidden = true;
 }
 
+genderButtons.forEach((button) => {
+  button.addEventListener("click", filtrer);
+});
+
 fetch(endpoint)
-  .then((response) => response.json())
-  .then(renderProducts)
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error("Products could not be loaded.");
+    }
+
+    return res.json();
+  })
+  .then((data) => {
+    allData = udsnit = data;
+    renderProducts(data);
+  })
   .catch(showError);
+
+function filtrer(e) {
+  const selectedGender = e.target.textContent.trim(); // Read the clicked filter button.
+  console.log(e.target.textContent);
+  if (selectedGender === "All") {
+    udsnit = allData;
+  } else {
+    udsnit = allData.filter((product) => getProductGender(product) === selectedGender);
+  }
+
+  genderButtons.forEach((button) => {
+    button.setAttribute("aria-pressed", button === e.currentTarget ? "true" : "false");
+  });
+
+  renderProducts(udsnit);
+}
 
 function renderProducts(products) {
   productList.innerHTML = "";
   console.log(products);
+  productCount.textContent = `${products.length} ${products.length === 1 ? "product" : "products"} found`;
   products.forEach((product) => {
     productList.innerHTML += createProductCard(product);
   });
+}
+
+function getProductGender(product) {
+  return Number(product.id) === 1165 ? "Women" : product.gender;
 }
 
 function createProductCard(product) {
@@ -27,23 +67,25 @@ function createProductCard(product) {
   const hasDiscount = Number(product.discount) > 0;
   const discountPercentage = Math.round(Number(product.discount));
   const isSoldOut = Boolean(product.soldout);
-  const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
-  const price = hasDiscount ? `<p class="price"><span class="old-price">${product.price} DKK</span> ${discountedPrice} DKK</p>` : `<p class="price">${product.price} DKK</p>`;
-  const discountLabel = product.discount ? `<p class="tilbudlabel">-${discountPercentage}%</p>` : "";
-  const offerText = hasDiscount ? `<p class="status offer-status">Sale</p>` : "";
+  const tilbudspris = Math.round(product.price - (product.price * product.discount) / 100);
+  const discountContent = hasDiscount
+    ? `
+        <p class="tilbudlabel">-${discountPercentage}%</p>
+        <p class="status offer-status">Sale</p>
+        <p class="price"><span class="old-price">Before ${product.price} DKK</span> <span class="tilbudspris">Now ${tilbudspris} DKK</span></p>
+      `
+    : `<p class="price">${product.price} DKK</p>`;
   const soldOutText = isSoldOut ? `<p class="status">Sold out</p>` : "";
 
   return `
-    <article class="card ${product.soldout ? "udsolgt" : ""} product-card">
-      <a href="productdetails.html?id=${product.id}">
-        ${discountLabel}
+    <article class="card product-card">
+      <a class="${product.soldout ? "udsolgt" : ""}" href="productdetails.html?id=${product.id}">
         <img class="product-image-${product.id}" src="${image}" alt="${product.productdisplayname}" />
         <div class="product-info">
           <h2>${product.productdisplayname}</h2>
           <h3 class="brand">${product.brandname}</h3>
-          <p class="category">${product.subcategory}</p>
-          ${offerText}
-          ${price}
+          ${discountContent}
+          <p class="category">${getProductGender(product)}</p>
           ${soldOutText}
         </div>
       </a>
@@ -58,63 +100,45 @@ function showError() {
 /*
 Explanation:
 
-cat reads the selected category from the page's URL parameter.
+cat reads the selected category from the URL parameter. When a category is present, the API request stays scoped to that category.
 
-categoryTitle selects the heading where the selected category is displayed.
+endpoint requests products from the selected category or from the full product catalogue.
 
-endpoint uses the category API when a category is selected, and the default list otherwise.
+categoryTitle shows the selected category, and stays hidden when the list is not category-specific.
 
-productList selects the HTML element where product cards are inserted.
+genderButtons selects the four filter buttons in productlist.html. Each button gets a click event listener before the products are fetched.
 
-categoryTitle.textContent displays the category name on the product list page.
+allData stores the full product array from the API; udsnit stores the currently selected subset. The fetch callback assigns the response to both, like the teacher's alleData = udsnit = data.
 
-categoryTitle.hidden hides the category heading when the page opens without a selected category.
+The fetch response check throws an error for an unsuccessful HTTP response. res.json() converts a successful response into JavaScript data. The next callback stores the data in both allData and udsnit, then renders the initial list, matching the teacher's allData = udsnit = data flow.
 
-fetch(endpoint) requests the products from the API.
+filtrer(e) runs when a gender button is clicked. e.target.textContent reads the clicked label. All restores allData; the other buttons filter allData by gender into udsnit. The console logs show the clicked label and current subset for debugging.
 
-.then((response) => response.json()) converts the API response into JavaScript data.
+The aria-pressed loop marks the active filter for assistive technology and for the button's visual selected state.
 
-.then(renderProducts) passes the product array to renderProducts.
+renderProducts(products) logs the products being displayed, clears the current product list, updates productCount to match the visible results, then creates one card per product with createProductCard(product). This is the equivalent of the teacher's console.log(json) inside visData(json).
 
-.catch(showError) runs showError if the data cannot be loaded.
+createProductCard(product) receives one product object and returns its HTML card.
 
-renderProducts(products) receives the product array.
+image builds the product image URL. hasDiscount, tilbudspris, and discountPercentage prepare the sale price and discount label.
 
-console.log(products) prints the received product data in the browser console, as in the teacher's example.
+discountContent uses a conditional expression to group the percentage label, Sale status, original Before price, and calculated Now price. Products without a discount show only their regular price.
 
-products.forEach() runs createProductCard once for each product.
+The product link class uses the teacher's conditional pattern: product.soldout ? "udsolgt" : "". A sold-out link receives the udsolgt class; otherwise the class is empty.
 
-productList.innerHTML += adds each generated product card to the product list.
+soldOutText displays "Sold out" when the API marks the product as sold out. Sale and sold-out status are independent conditions.
 
-createProductCard(product) receives one product at a time as a parameter.
+showError() displays a message if the API request fails.
 
-image builds the product image URL from product.id.
+The existing category query and product-card rendering are preserved; the gender filter narrows the fetched category list when one is selected.
 
-hasDiscount is true only when the API discount value is greater than zero.
+The product API labels product 1165 as Men, but this product should be treated as Women in this project. getProductGender() applies that single confirmed correction to the gender filter.
 
-isSoldOut converts the API soldout value to a true/false value.
+The products endpoint no longer sets limit=30, so gender filters can search all products returned for the selected category or catalogue.
 
-discountedPrice calculates the reduced price using the API discount percentage.
+productCount is the live result counter in productlist.html. renderProducts updates it every time the list is drawn, including after each gender filter is selected.
 
-discountPercentage rounds the API discount to a whole percentage for the visual label.
+genderButtons selects the teacher's filter controls with #filtre button. createProductCard displays the corrected product gender, not the subcategory.
 
-discountLabel follows the teacher's conditional template pattern and creates a percentage tilbudlabel only when product.discount is truthy.
-
-price selects regular or discounted price markup based on hasDiscount.
-
-offerText displays "Sale" only when hasDiscount is true.
-
-The article class uses the teacher's direct conditional pattern: product.soldout ? "udsolgt" : "". A true value adds the udsolgt CSS class to the product card; false leaves that class empty. The card and product-card classes preserve the site's existing card styling.
-
-soldOutText displays "Sold out" only when isSoldOut is true.
-
-return sends the product card HTML back to the forEach() callback, where it is added to productList.
-
-The link uses productdetails.html?id=${product.id}, so the details page knows which product to display.
-
-showError() displays an error message in the product list if the API request fails.
-
-In the returned card, offerText, price, and soldOutText are inserted in the product information area. The offer and sold-out conditions are independent, so both messages can appear when both API values apply.
-
-discountLabel is inserted inside the product link before the image so CSS can position the tilbudlabel over the image area.
+For discounted products, tilbudspris is Math.round(price - (price * discount / 100)). The discountContent conditional displays the original amount as Before and the calculated amount as Now. Products without a discount show one regular price.
 */
