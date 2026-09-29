@@ -88,7 +88,7 @@ main {
   height: 100%;
 }
 
-.tilbudlabel {
+.discount-label {
   position: absolute;
   z-index: 2;
   top: 1rem;
@@ -163,12 +163,12 @@ main {
   text-decoration: line-through;
 }
 
-.tilbudspris {
+.discount-price {
   color: #1f6b4a;
   font-weight: 800;
 }
 
-.udsolgt {
+.sold-out {
   filter: grayscale(1);
   opacity: 0.5;
   pointer-events: none;
@@ -291,17 +291,17 @@ main {
 }
 
 /*
-Forklaring:
+Explanation:
 
-.product-card a uses position: relative as the positioning context for the conditional tilbudlabel.
+.product-card a uses position: relative as the positioning context for the conditional .discount-label.
 
-.tilbudlabel follows the teacher's absolute top/right positioning, 1rem padding, and yellow background; it displays the API discount percentage in the upper-right corner above the product image.
+.discount-label follows the teacher's absolute top/right positioning, 1rem padding, and yellow background; it displays the API discount percentage in the upper-right corner above the product image.
 
-z-index keeps the tilbudlabel in front of the image.
+z-index keeps the .discount-label in front of the image.
 
-.tilbudspris highlights the discounted Now price beside the crossed-out Before price.
+.discount-price highlights the discounted Now price beside the crossed-out Before price.
 
-.udsolgt applies grayscale, half opacity, and disables pointer events for the sold-out product link.
+.sold-out applies grayscale, half opacity, and disables pointer events for the sold-out product link.
 
 .product-card uses a positioned grid container with a white background. The teacher's subgrid row span is not used because this page has a nested link wrapper and no matching explicit parent row tracks.
 */
