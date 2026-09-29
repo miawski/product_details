@@ -286,12 +286,16 @@ body.home-body .site-header {
   outline-offset: 3px;
 }
 
-.product-count {
-  align-self: center;
-  margin-left: 0.35rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
 }
 
 /*
@@ -373,5 +377,5 @@ The reduced-motion rules disable category transitions and movement when the visi
 
 The aria-pressed selector keeps the active gender filter highlighted; :hover and :focus-visible provide mouse and keyboard feedback.
 
-.product-count sits beside the filter buttons, keeps its label on one line, and remains vertically aligned with the controls.
+.visually-hidden keeps the live product count available to assistive technology without displaying it visually.
 */
