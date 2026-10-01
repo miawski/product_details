@@ -26,12 +26,19 @@
           <h1>Shop</h1>
           <h2 id="category-title" hidden></h2>
         </div>
-        <nav id="filters" class="gender-filter-buttons" aria-label="Filter products by gender">
+        <nav id="filters" class="product-control-buttons" aria-label="Filter products by gender">
           <button type="button" data-gender-filter="All" aria-pressed="true">All</button>
           <button type="button" data-gender-filter="Unisex" aria-pressed="false">Unisex</button>
           <button type="button" data-gender-filter="Women" aria-pressed="false">Women</button>
           <button type="button" data-gender-filter="Men" aria-pressed="false">Men</button>
           <span class="product-count visually-hidden" id="product-count" aria-live="polite">0 products found</span>
+        </nav>
+        <nav id="sorting" class="product-control-buttons" aria-label="Sort products">
+          <span class="controls-label">Sort:</span>
+          <button type="button">Price: low to high</button>
+          <button type="button">Price: high to low</button>
+          <button type="button">A-Z</button>
+          <button type="button">Z-A</button>
         </nav>
       </section>
 

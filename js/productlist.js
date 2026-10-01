@@ -3,6 +3,7 @@ const categoryTitle = document.querySelector("#category-title");
 const endpoint = cat ? `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(cat)}` : "https://kea-alt-del.dk/t7/api/products";
 const productList = document.querySelector(".product-list");
 const genderButtons = document.querySelectorAll("#filters button");
+const sortButtons = document.querySelectorAll("#sorting button");
 const visibleCount = document.querySelector("#product-count");
 let allData;
 let visibleProducts;
@@ -17,6 +18,10 @@ genderButtons.forEach((button) => {
   button.addEventListener("click", filterProducts);
 });
 
+sortButtons.forEach((button) => {
+  button.addEventListener("click", sortProducts);
+});
+
 fetch(endpoint)
   .then((res) => {
     if (!res.ok) {
@@ -25,7 +30,7 @@ fetch(endpoint)
 
     return res.json();
   })
-  .then(data => {
+  .then((data) => {
     allData = visibleProducts = data;
     renderProducts(visibleProducts);
   })
@@ -44,6 +49,24 @@ function filterProducts(e) {
   genderButtons.forEach((button) => {
     button.setAttribute("aria-pressed", button === e.currentTarget ? "true" : "false");
   });
+
+  renderProducts(visibleProducts);
+}
+
+function sortProducts(e) {
+  if (!Array.isArray(visibleProducts)) return;
+
+  const choice = e.currentTarget.textContent.trim();
+
+  if (choice === "Price: low to high") {
+    visibleProducts = [...visibleProducts].sort((a, b) => Number(a.price) - Number(b.price));
+  } else if (choice === "Price: high to low") {
+    visibleProducts = [...visibleProducts].sort((a, b) => Number(b.price) - Number(a.price));
+  } else if (choice === "A-Z") {
+    visibleProducts = [...visibleProducts].sort((a, b) => a.productdisplayname.localeCompare(b.productdisplayname, "en"));
+  } else if (choice === "Z-A") {
+    visibleProducts = [...visibleProducts].sort((a, b) => b.productdisplayname.localeCompare(a.productdisplayname, "en"));
+  }
 
   renderProducts(visibleProducts);
 }
